@@ -1,0 +1,24 @@
+/* main file for root components styling */
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin: 0 0 10px 0;
+    display: none;
+}
+
+h2 {
+    margin: 0;
+}
+
+label.form-label {
+    margin-bottom: 0;
+}
+
