@@ -1,4 +1,4 @@
-Make sure you're in  .\client\backend\
+Make sure you're in  .\server
 
 run the following in terminal
 python -m uvicorn main:app --reload
