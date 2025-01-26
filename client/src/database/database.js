@@ -7,6 +7,11 @@ const database = [
         "role": "admin",
     },
     {
+        "username": "dj",
+        "password": "dj",
+        "role": "admin",
+    },
+    {
         "username": "user",
         "password": "user",
         "role": "user",

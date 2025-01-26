@@ -8,7 +8,7 @@ app = FastAPI()
 # origins to allow CORS
 origins = [
     "http://localhost",
-    "http://localhost:3000",
+    "http://localhost:4000",
 ]
 
 # allow app to recieve requests from the origins
