@@ -1,6 +1,13 @@
 from fastapi import APIRouter
-from models.userModel import *
+from models.user.userModel import *
+from models.database.database import *
+
+import os
+print(os.getcwd())  # Shows your current working directory
+
 router = APIRouter()
+path = ".."
+userDatabase = database(path)
 
 # file contains basic routes for user retrieval, creation and deletion
 # add more routes, and get user data here
@@ -21,6 +28,8 @@ def index():
 @router.post("/items/")
 async def create_item(item: userItem):
     items = read_data_from_db()
+    
     items.append(item.model_dump())
     write_data_to_db(items)
     return item
+

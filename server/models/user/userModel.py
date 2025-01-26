@@ -8,6 +8,8 @@ DATABASE_FILE = "userData.json"
 class userItem(BaseModel):
     user_name: str
     user_pass: str
+    user_email: str
+    
 
 # Helper function to read data from the JSON database
 def read_data_from_db():
@@ -26,6 +28,8 @@ def write_data_to_db(data):
     except FileNotFoundError:
         print("Error")
     return 
+
+
 
 
 # Extras For CLI interaction:

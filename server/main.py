@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
-from models.userModel import *
+
+
 from fastapi.middleware.cors import CORSMiddleware
 from routers.users import router
 
