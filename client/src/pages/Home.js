@@ -10,8 +10,6 @@ function Home() {
         axios.get('http://localhost:8000/')
         .then((res) => {
             // this will print the recieved data, chaneg the URL to specific routes to change data, will not show unless native URL (eg, http://localhost:8000/) is used
-            console.log("RECIEVED")
-            console.log(res.data)
             getTest(res.data.result)
         }).catch((err) => {
             console.log(err)

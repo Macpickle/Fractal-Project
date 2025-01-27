@@ -29,7 +29,6 @@ class database:
     def getData(self):
         return self.data
     
-    
     def getDataSize(self):
         return self.dataSize
 
@@ -41,11 +40,12 @@ class database:
             list.append(i[entry_name])
         return list
     
-    def getUser(self,user):
+    # get user by type, eg. if type == "email", it will search by email
+    def getUser(self, user, type):
         if(self.dataSize == 0):
             return {}
         for i in self.data:
-            if(user == i['user_name']):
+            if(user == i[type]):
                 return i
  
 

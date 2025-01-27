@@ -7,39 +7,41 @@ import AuthenticationWrapper from "../components/AuthenticationWrapper"
 // hooks
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
-
-import database from '../database/database'; // temporary database
+import axios from 'axios';
 
 function Login() {
     const navigate = useNavigate(); // create navigate object for redirects    
     const location = useLocation(); // object to recieve data from different pages, in this case, from register account page
 
-    // get username and password from form data
+    // get email and password from form data
     const loginUser = (event) => {
         event.preventDefault(); 
-        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         const remember = document.getElementById('remember').checked;
 
-        console.log(username, password, remember);
-        // check if user is in database
-        // (eg. check if username and password are valid)
-        // if valid, home page and set token in local storage
-        // else raise errors
-        
-        // for now, just check if user is in "database"
-        const user = database.find(user => user.username === username && user.password === password);
-        
-        // error handling 
-        if (!user) {
-            document.querySelector(".error").style.display = "block";
-            return;
-        }
+        axios.post('/login/', {email, password})
+            .then(response => {
+                const {detail} = response.data;
 
-        // upon successful login, set token in local storage
-        localStorage.setItem("username", username);
-        localStorage.setItem("role", user.role);
-        navigate('/');
+                // error handling
+                if (detail === "Invalid email or password") {
+                    document.querySelector(".error").style.display = "block";
+                } 
+
+                // if login is successful, set token in local storage
+                if (detail === "Login Successful") {
+                    const {username, role} = response.data.user;
+
+                    // upon successful login, set token in local storage
+                    localStorage.setItem("username", username);
+                    localStorage.setItem("role", role);
+                    navigate('/');
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
     // reset display of error message
@@ -50,24 +52,14 @@ function Login() {
     // sets username input field to value if redirected from registering
     useEffect(() => {
         if (location.state) {
-            document.getElementById("username").value = location.state.username;
-        }
-        
-    });
+            document.getElementById("email").value = location.state.email;
+        }     
+    }, [location.state]);
 
     return (
         <AuthenticationWrapper title={"Login"}>
-            {/*TEMP DELETE FOR PROD*/}
-            <div className="position-absolute top-0 start-0">
-                <p>
-                    username: macpickle <br/>
-                    password: macpickle <br/>
-                    (or make your own in database.js)
-                </p>
-            </div>
-
             <div className="error alert alert-danger" style={{display: "none"}}>
-                <p className="mb-0">Invalid username or password</p>
+                <p className="mb-0">Invalid email or password</p>
             </div>
 
             <div className="mt-3 mb-5">
@@ -76,10 +68,10 @@ function Login() {
 
                     <div className="mb-3">
                         <input
-                            type="text"
+                            type="email"
                             className="form-control"
-                            id="username"
-                            placeholder="Username"
+                            id="email"
+                            placeholder="Email"
                             required
                             autoComplete="on"
                             onChange={resetError}

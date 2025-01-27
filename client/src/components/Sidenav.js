@@ -19,7 +19,8 @@ function Sidenav({title}) {
 
     const logout = () => {
         // remove token from local storage
-        localStorage.removeItem("username");
+        localStorage.clear();
+
         navigate('/login');
     }
 

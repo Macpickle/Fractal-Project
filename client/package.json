@@ -1,6 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
+  "proxy": "http://localhost:8000",
   "private": true,
   "dependencies": {
     "axios": "^1.7.9",
@@ -13,7 +14,7 @@
     "react-scripts": "^5.0.1"
   },
   "scripts": {
-    "start": "PORT=4000 react-scripts start",
+    "start": "SET PORT=4000 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

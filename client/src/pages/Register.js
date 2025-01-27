@@ -6,8 +6,8 @@ import AuthenticationWrapper from "../components/AuthenticationWrapper"
 
 // hooks
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-import database from '../database/database'; // temporary database
 
 function Register() {
     const navigate = useNavigate(); // create navigate object for redirects    
@@ -19,21 +19,24 @@ function Register() {
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
 
-        console.log(username, email, password);
-        // check if user can be created with these credentials
-        // (eg. check if user and email is unique)
-        // if valid, login page
-        // else raise errors
-        
-        const user = database.find(user => user.username === username || user.email === email);
+        axios.post("/register/", {username, email, password})
+            .then((response) => {
+                const {detail} = response.data;
 
-        // error handling
-        if (user) {
-            document.querySelector(".error").style.display = "block";
-            return;
-        }
-        
-        navigate('/login', {state: {username: username}});
+                // error handling
+                if (detail === "Username or Email is already in use") {
+                    document.querySelector(".error").style.display = "block";
+                }
+                
+                if (detail === "Registration Successful") {
+                    // if register is successful, redirect to login with state
+                    navigate('/login', {state: {email: email}});
+                }
+
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }
 
     // reset display of error message

@@ -4,9 +4,9 @@ import json
 
 
 class userItem(BaseModel):
-    user_name: str
-    user_pass: str
-    user_email: str
+    username: str
+    password: str
+    email: str
     
 
 

@@ -1,97 +1,50 @@
 [
   {
-    "user_name": "user001",
-    "user_pass": "password001",
-    "email": "user001@example.com",
-    "role": "N/A"
+    "username": "123",
+    "password": "123",
+    "email": "123@123",
+    "role": "user"
   },
   {
-    "user_name": "user002",
-    "user_pass": "password002",
-    "email": "user002@example.com",
-    "role": "N/A"
+    "username": "qwe",
+    "password": "qwe",
+    "email": "qwe@qwe",
+    "role": "user"
   },
   {
-    "user_name": "user003",
-    "user_pass": "password003",
-    "email": "user003@example.com",
-    "role": "N/A"
+    "username": "123",
+    "password": "123",
+    "email": "123@123",
+    "role": "user"
   },
   {
-    "user_name": "user004",
-    "user_pass": "password004",
-    "email": "user004@example.com",
-    "role": "N/A"
+    "username": "qweqwe",
+    "password": "123",
+    "email": "qwe@123",
+    "role": "user"
   },
   {
-    "user_name": "user005",
-    "user_pass": "password005",
-    "email": "user005@example.com",
-    "role": "N/A"
+    "username": "test",
+    "password": "test",
+    "email": "test@test",
+    "role": "user"
   },
   {
-    "user_name": "string",
-    "user_pass": "string",
-    "user_email": "string"
+    "username": "wqe",
+    "password": "test",
+    "email": "asd@s",
+    "role": "user"
   },
   {
-    "user_name": "string",
-    "user_pass": "string",
-    "user_email": "string"
+    "username": "asd",
+    "password": "asd",
+    "email": "asd@asd",
+    "role": "admin"
   },
   {
-    "user_name": "string",
-    "user_pass": "string",
-    "user_email": "string"
-  },
-  {
-    "user_name": "st1ring",
-    "user_pass": "string",
-    "user_email": "string"
-  },
-  {
-    "user_name": "HAaaLO",
-    "user_pass": "string",
-    "user_email": "string"
-  },
-  {
-    "user_name": "HAaaLO",
-    "user_pass": "string",
-    "user_email": "string"
-  },
-  {
-    "user_name": "HAaaLO",
-    "user_pass": "string",
-    "user_email": "string"
-  },
-  {
-    "user_name": "HAaaLO",
-    "user_pass": "string",
-    "user_email": "string"
-  },
-  {
-    "user_name": "HAaaLO",
-    "user_pass": "string",
-    "user_email": "string"
-  },
-  {
-    "user_name": "HAaaLO",
-    "user_pass": "string",
-    "user_email": "string"
-  },
-  {
-    "user_name": "HAaaLO",
-    "user_pass": "string",
-    "user_email": "string"
-  },
-  {
-    "user_name": "HAaaLO",
-    "user_pass": "string",
-    "user_email": "string"
-  },
-  {
-    "user_name": "HAaaaaaaaLO",
-    "user_pass": "string",
-    "user_email": "string"
+    "username": "asds",
+    "password": "asd",
+    "email": "asd@asds",
+    "role": "user"
   }
 ]
