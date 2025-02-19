@@ -8,11 +8,11 @@ function AuthenticationWrapper({children, title}) {
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-12 col-md-6 col-lg-4">
-                        <div className="shadow-lg p-3 mb-5 pt-5 bg-white rounded">
+                        <div className="loginForm p-3 mb-5 pt-5 ">
                             <div className="text-center">
-                                <img className="mb-3" src="..." alt="LOGO" />
+                                <img src="/images/logo.png" alt="LOGO" width="100px" height="75px"/>
                                 <h3 className="mt-5">{title}</h3>
-                            </div>
+                            </div> 
                             
                             {children}
                         </div>

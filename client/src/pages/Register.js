@@ -7,7 +7,6 @@ import AuthenticationWrapper from "../components/AuthenticationWrapper"
 // hooks
 import { useNavigate } from 'react-router-dom';
 
-import database from '../database/database'; // temporary database
 
 function Register() {
     const navigate = useNavigate(); // create navigate object for redirects    
@@ -24,14 +23,6 @@ function Register() {
         // (eg. check if user and email is unique)
         // if valid, login page
         // else raise errors
-        
-        const user = database.find(user => user.username === username || user.email === email);
-
-        // error handling
-        if (user) {
-            document.querySelector(".error").style.display = "block";
-            return;
-        }
         
         navigate('/login', {state: {username: username}});
     }
@@ -83,7 +74,7 @@ function Register() {
                         />
                     </div>
 
-                    <button type="submit" className="btn btn-primary w-100">Submit</button>
+                    <button type="submit" className="btn btn-secondary w-100">Submit</button>
                 </form>
 
                 <div className="mt-1 text-center">
