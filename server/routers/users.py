@@ -1,9 +1,6 @@
 from fastapi import APIRouter
-from models.user.userModel import *
+from models.userModel import *
 from models.database.database import *
-
-import os
-print(os.getcwd())  # Shows your current working directory
 
 router = APIRouter()
 path = "./userData.json"
@@ -23,8 +20,6 @@ async def read_users():
 @router.post("/items/")
 async def create_item(item: userItem):
     items = read_data_from_db()
-    
     items.append(item.model_dump())
     write_data_to_db(items)
     return item
-
