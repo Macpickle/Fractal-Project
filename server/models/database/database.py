@@ -2,15 +2,18 @@ import json
 
 def read_data_from_db(filename):
     try:
-        with open(filename, "r") as file:
+        with open(filename, 'r') as file:
             data = json.load(file)
     except FileNotFoundError:
         print(f'{filename} not found, database.py')
         data = []
+    except PermissionError:
+        print(f'Permission denied: {filename}')
+        data = []
     return data
 
 class database:
-    def __init__(self,filename):
+    def __init__(self, filename):
         self.filename = filename
         self.data = read_data_from_db(filename)
         self.dataSize = len(self.data)

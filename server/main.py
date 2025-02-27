@@ -2,14 +2,15 @@ from fastapi import FastAPI, HTTPException
 
 
 from fastapi.middleware.cors import CORSMiddleware
-from routers.users import router
+from routers.users import router as userRouter
+from routers.catalog import router as cataRouter
 
 app = FastAPI()
 
 # origins to allow CORS
 origins = [
     "http://localhost",
-    "http://localhost:4000",
+    "http://localhost:3000",
 ]
 
 # allow app to recieve requests from the origins
@@ -22,7 +23,8 @@ app.add_middleware(
 )
 
 # add user specific routes
-app.include_router(router)
+app.include_router(userRouter)
+app.include_router(cataRouter)
 
 
 

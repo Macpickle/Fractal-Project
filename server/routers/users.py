@@ -6,21 +6,16 @@ import os
 print(os.getcwd())  # Shows your current working directory
 
 router = APIRouter()
-path = ".."
+path = "./userData.json"
 userDatabase = database(path)
 
 # file contains basic routes for user retrieval, creation and deletion
 # add more routes, and get user data here
 
 # Create a route to get all users
-@router.get("/users/")
+@router.get("/users")
 async def read_users():
-    return {"message": "GET users"}
-
-# Create a index route
-@router.get("/")
-def index():
-    return {"result": "Hello World"}
+    return {"message": userDatabase.getData()}
 
 # BELOW PUTS IT ON THE API http://127.0.0.1:8000/items/
 
