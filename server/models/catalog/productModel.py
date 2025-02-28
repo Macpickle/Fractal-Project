@@ -1,10 +1,8 @@
 from pydantic import BaseModel
 
 class productItem(BaseModel):
-    make: str
-    model: str
-    year: str
-    price: str
-    color: str
-    mileage: str
-    description: str
+    brand: str | None = None
+    name: str | None = None
+    price: float | None = None
+    description: str | None = None
+    time: str | None = None

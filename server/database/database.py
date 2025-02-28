@@ -18,7 +18,6 @@ def write_data_to_db(data,filename):
         return False
     return True
 
-
 class database:
     def __init__(self, filename):
         self.filename = filename
@@ -28,6 +27,13 @@ class database:
     # Function returns a list of dictionary entries
     def getData(self):
         return self.data
+    
+    # Function adds a dictionary entry to the database
+    def addData(self, entry):
+        self.data.append(entry)
+        self.dataSize += 1
+        write_data_to_db(self.data, self.filename)
+        return True
     
     def getDataSize(self):
         return self.dataSize
@@ -56,7 +62,6 @@ class InvalidUsername(Exception):
         self.message = f'Username {user_name} is not valid (Duplicate)'
         super().__init__(self.message)
         
-
 class LoginSuccess(Exception):
     def __init__(self, user: userItem):
         self.user_name = user.user_name

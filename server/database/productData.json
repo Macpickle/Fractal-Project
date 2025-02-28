@@ -1,72 +1,38 @@
 [
-    {
-        "id": 1,
-        "brand": "Pagani",
-        "description": "Pagani Huayra",
-        "price": 3000000,
-        "time": "2021-10-01T10:00:00Z"
-    },
-    {
-        "id": 2,
-        "brand": "Pagani",
-        "description": "Pagani Zonda",
-        "price": 2500000,
-        "time": "2021-10-02T11:00:00Z"
-    },
-    {
-        "id": 3,
-        "brand": "Pagani",
-        "description": "Pagani Huayra Roadster",
-        "price": 3500000,
-        "time": "2021-10-03T12:00:00Z"
-    },
-    {
-        "id": 4,
-        "brand": "Ferrari",
-        "description": "Ferrari LaFerrari",
-        "price": 1400000,
-        "time": "2021-10-04T13:00:00Z"
-    },
-    {
-        "id": 5,
-        "brand": "Lamborghini",
-        "description": "Lamborghini Aventador",
-        "price": 393695,
-        "time": "2021-10-05T14:00:00Z"
-    },
-    {
-        "id": 6,
-        "brand": "Bugatti",
-        "description": "Bugatti Chiron",
-        "price": 3000000,
-        "time": "2021-10-06T15:00:00Z"
-    },
-    {
-        "id": 7,
-        "brand": "McLaren",
-        "description": "McLaren P1",
-        "price": 1150000,
-        "time": "2021-10-07T16:00:00Z"
-    },
-    {
-        "id": 8,
-        "brand": "Aston Martin",
-        "description": "Aston Martin Valkyrie",
-        "price": 3000000,
-        "time": "2021-10-08T17:00:00Z"
-    },
-    {
-        "id": 9,
-        "brand": "Koenigsegg",
-        "description": "Koenigsegg Jesko",
-        "price": 3000000,
-        "time": "2021-10-09T18:00:00Z"
-    },
-    {
-        "id": 10,
-        "brand": "Porsche",
-        "description": "Porsche 918 Spyder",
-        "price": 845000,
-        "time": "2021-10-10T19:00:00Z"
-    }
+  {
+    "id": 1,
+    "brand": "Pagani",
+    "name": "Zonda F",
+    "description": "The greatest car ever made",
+    "price": 3000000,
+    "time": "2021-10-01T10:00:00Z"
+  },
+  {
+    "brand": "test",
+    "name": "Pagani",
+    "price": 1231231212323.0,
+    "description": "asd",
+    "time": "2025-02-27 20:19:16.517464"
+  },
+  {
+    "brand": "Pagani",
+    "name": "Zonda R",
+    "price": 654323253.0,
+    "description": "An awesome Car",
+    "time": "2025-02-27 20:19:39.423821"
+  },
+  {
+    "brand": "asd",
+    "name": "asd",
+    "price": 123.0,
+    "description": "asd",
+    "time": "2025-02-27 20:20:21.289576"
+  },
+  {
+    "brand": "Nissan",
+    "name": "Skyline R34",
+    "price": 453245.0,
+    "description": "fast and furious",
+    "time": "2025-02-27 20:21:50.248425"
+  }
 ]

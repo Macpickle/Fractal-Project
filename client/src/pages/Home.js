@@ -1,10 +1,12 @@
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import Create from '../components/Create';
 import { useState, useEffect } from 'react';
 import AxiosRequest from '../utils/Axios';
 
 function Home() {
     const [catalog, setCatalog] = useState([]);
+    const [showCreate, setShowCreate] = useState(false);
 
     // inital load of sample data
     useEffect(() => {
@@ -20,6 +22,21 @@ function Home() {
             console.log(err);
         });
     }, []);
+
+    // update catalog on all changes
+    useEffect(() => {
+        AxiosRequest({
+            url: "/products",
+            method: "GET",
+            data: {},
+        })
+        .then((res) => {
+            setCatalog(res.data);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    }, [showCreate]);
 
     // sort function
     const handleSort = (e) => {
@@ -69,7 +86,10 @@ function Home() {
                             </select>
                         </div>
                         <div className="col-md-2 col-sm-4">
-                            <button className="btn btn-secondary w-100">Add</button>
+                            <button className="btn btn-secondary w-100" onClick={() => setShowCreate(!showCreate)}>
+                                Create
+                            </button>
+                            {showCreate && <Create handleCreate={() => setShowCreate(!showCreate)} />}
                         </div>
                     </div>
                 </div>
@@ -77,10 +97,10 @@ function Home() {
                 <div className="container-fluid">
                     <div className="row">
                         {catalog.map((item) => (
-                            <div key={item.id} className="col-md-4 col-sm-6 mb-3">
+                            <div key={item.name} className="col-md-4 col-sm-6 mb-3">
                                 <div className="card">
                                     <div className="card-body">
-                                        <h5 className="card-title">{item.brand}</h5>
+                                        <h5 className="card-title">{item.brand} - {item.name}</h5>
                                         <p className="card-text">{item.description}</p>
                                         <p className="card-text">Price: ${item.price}</p>
                                         <p className="card-text">Time: {item.time}</p>
