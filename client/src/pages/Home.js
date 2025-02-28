@@ -1,87 +1,24 @@
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useState, useEffect } from 'react';
-
-// sample data
-const sampleCatalog = [
-    {
-        id: 1,
-        brand: "Pagani",
-        description: "Pagani Huayra",
-        price: 3000000,
-        time: "2021-10-01T10:00:00Z"
-    },
-    {
-        id: 2,
-        brand: "Pagani",
-        description: "Pagani Zonda",
-        price: 2500000,
-        time: "2021-10-02T11:00:00Z"
-    },
-    {
-        id: 3,
-        brand: "Pagani",
-        description: "Pagani Huayra Roadster",
-        price: 3500000,
-        time: "2021-10-03T12:00:00Z"
-    },
-    {
-        id: 4,
-        brand: "Ferrari",
-        description: "Ferrari LaFerrari",
-        price: 1400000,
-        time: "2021-10-04T13:00:00Z"
-    },
-    {
-        id: 5,
-        brand: "Lamborghini",
-        description: "Lamborghini Aventador",
-        price: 393695,
-        time: "2021-10-05T14:00:00Z"
-    },
-    {
-        id: 6,
-        brand: "Bugatti",
-        description: "Bugatti Chiron",
-        price: 3000000,
-        time: "2021-10-06T15:00:00Z"
-    },
-    {
-        id: 7,
-        brand: "McLaren",
-        description: "McLaren P1",
-        price: 1150000,
-        time: "2021-10-07T16:00:00Z"
-    },
-    {
-        id: 8,
-        brand: "Aston Martin",
-        description: "Aston Martin Valkyrie",
-        price: 3000000,
-        time: "2021-10-08T17:00:00Z"
-    },
-    {
-        id: 9,
-        brand: "Koenigsegg",
-        description: "Koenigsegg Jesko",
-        price: 3000000,
-        time: "2021-10-09T18:00:00Z"
-    },
-    {
-        id: 10,
-        brand: "Porsche",
-        description: "Porsche 918 Spyder",
-        price: 845000,
-        time: "2021-10-10T19:00:00Z"
-    }
-];
+import AxiosRequest from '../utils/Axios';
 
 function Home() {
     const [catalog, setCatalog] = useState([]);
 
     // inital load of sample data
     useEffect(() => {
-        setCatalog(sampleCatalog);
+        AxiosRequest({
+            url: "/products",
+            method: "GET",
+            data: {},
+        })
+        .then((res) => {
+            setCatalog(res.data);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
     }, []);
 
     // sort function
@@ -94,7 +31,7 @@ function Home() {
         } else if (value === "time") {
             setCatalog(catalog.sort((a, b) => new Date(a.time) - new Date(b.time)));
         } else {
-            setCatalog([...sampleCatalog]); // reset to original
+            setCatalog([...catalog]); // reset to original
             return;
         }
 
@@ -108,7 +45,7 @@ function Home() {
         if (value) {
             setCatalog(catalog.filter((item) => item.brand.toLowerCase().includes(value.toLowerCase())));
         } else {
-            setCatalog([...sampleCatalog]); // reset to original
+            setCatalog([...catalog]); // reset to original
         }
     }
 
