@@ -35,6 +35,18 @@ class database:
         write_data_to_db(self.data, self.filename)
         return True
     
+    # Function deletes a dictionary entry from the database
+    def deleteData(self, entry):
+        for i in self.data:
+            if i["id"] == entry["id"]:
+                self.data.remove(i)
+                self.dataSize -= 1
+                write_data_to_db(self.data, self.filename)
+                return True
+            
+        return False    
+        
+    
     def getDataSize(self):
         return self.dataSize
 

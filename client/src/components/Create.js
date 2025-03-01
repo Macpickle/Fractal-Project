@@ -1,6 +1,6 @@
 import AxiosRequest from "../utils/Axios";
 
-function Create({handleCreate}) {
+function Create({handleCreate, handleDisplay}) {
     const handleSubmit = (e) => {
         e.preventDefault();
         const brand = document.getElementById("brand").value;
@@ -18,7 +18,8 @@ function Create({handleCreate}) {
             },
         })
         .then((res) => {
-            handleCreate();
+            handleCreate(res.data);
+            handleDisplay();
         })
         .catch((err) => {
             console.log(err);
@@ -28,7 +29,7 @@ function Create({handleCreate}) {
     return (
         <div className="position-fixed top-50 start-50 translate-middle z-3 bg-black bg-opacity-75 p-5 w-100 h-100">
             <div className="container bg-white text-black p-5 w-50 position-relative rounded rounded-3 border border-secondary">
-                <button className="btn-close position-absolute top-0 end-0 m-3" onClick={() => handleCreate()}></button>
+                <button className="btn-close position-absolute top-0 end-0 m-3" onClick={() => handleDisplay()}></button>
                 <h1>Create</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
