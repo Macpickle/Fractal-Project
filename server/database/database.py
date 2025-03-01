@@ -25,7 +25,11 @@ class database:
         self.dataSize = len(self.data)
 
     # Function returns a list of dictionary entries
-    def getData(self):
+    def getData(self, id=None):
+        if id:
+            for i in self.data:
+                if i["id"] == id:
+                    return i
         return self.data
     
     # Function adds a dictionary entry to the database
@@ -45,25 +49,19 @@ class database:
                 return True
             
         return False    
-        
     
+    # Function modifies a dictionary entry in the database
+    def modifyData(self, entry):
+        for i in self.data:
+            if i["id"] == entry["id"]:
+                i.update(entry)
+                write_data_to_db(self.data, self.filename)
+                return True
+            
+        return False
+
     def getDataSize(self):
         return self.dataSize
-
-    def getEntry(self,entry_name):
-        if(self.dataSize == 0):
-            return
-        list = []
-        for i in self.data:
-            list.append(i[entry_name])
-        return list
-    
-    def getUser(self,user):
-        if(self.dataSize == 0):
-            return {}
-        for i in self.data:
-            if(user == i['user_name']):
-                return i
 
 # ERROR CLASSES
 from models.user.userModel import *

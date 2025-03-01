@@ -1,12 +1,14 @@
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Create from '../components/Create';
+import Modify from '../components/Modify';
 import { useState, useEffect } from 'react';
 import AxiosRequest from '../utils/Axios';
 
 function Home() {
     const [catalog, setCatalog] = useState([]);
     const [showCreate, setShowCreate] = useState(false);
+    const [showModify, setShowModify] = useState(false);
 
     // inital load of sample data
     useEffect(() => {
@@ -40,6 +42,10 @@ function Home() {
     const handleCreate = (data) => {
         setCatalog([...catalog, data]);
     }
+
+    const handleModify = (data) => {
+        setCatalog(catalog.map((item) => item.id === data.id ? data : item));
+    }
     
     return (
         <div className='bg-white min-vh-100'>
@@ -47,6 +53,7 @@ function Home() {
                 <li>Home</li>
             </Navbar>
             <main className="container min-vh-100">
+                { showModify && <Modify handleModify={handleModify} handleDisplay={() => setShowModify(!showModify)} id={showModify} /> }
                 <div className="container-fluid mt-3">
                     <div className="row mb-3">
                         <div className="col-md-7 col-sm-12 mb-2">
@@ -81,7 +88,7 @@ function Home() {
                                         <p className="card-text">Price: ${item.price}</p>
                                         <p className="card-text">Time: {item.time}</p>
                                         <div className="d-flex gap-1">
-                                            <button className="btn btn-secondary">Modify</button>
+                                            <button className="btn btn-secondary" onClick={() => setShowModify(item.id)}>Modify</button>
                                             <button className="btn btn-danger" onClick={() => handleDelete(item.id)}>Delete</button>
                                         </div>
                                     </div>

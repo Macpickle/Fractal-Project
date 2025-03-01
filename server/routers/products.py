@@ -10,6 +10,10 @@ productDatabase = database("database/productData.json")
 async def read_products():
     return productDatabase.getData()
 
+@router.get("/products/{id}")
+async def read_product(id: int):
+    return productDatabase.getData(id)
+
 @router.post("/products/")
 async def create_product(product: productItem):
     data = product.dict()
@@ -25,5 +29,18 @@ async def delete_product(id: int):
     
     if found:
         return {"message":"Product deleted"}
+    else:
+        return {"message":"Product not found"}
+    
+@router.put("/products/{id}")
+async def update_product(id: int, product: productItem):
+    data = product.dict()
+    data.update({"time":str(datetime.now())})
+    data.update({"id":id})
+
+    found = productDatabase.modifyData(data)
+
+    if found:
+        return {"message":"Product updated", "data":data}
     else:
         return {"message":"Product not found"}
