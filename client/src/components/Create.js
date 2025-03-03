@@ -62,11 +62,11 @@ function Create({handleCreate, handleDisplay}) {
                     </div>
                     <div className="mb-3">
                         <label htmlFor="description" className="form-label">Description</label>
-                        <textarea className="form-control create" id="description" rows="3"></textarea>
+                        <textarea className="form-control create" id="description" rows="3" maxLength="100" ></textarea>
                     </div>
                     <div className="mb-3">
                         <label htmlFor="price" className="form-label">Price</label>
-                        <input type="number" className="form-control create" id="price" />
+                        <input type="number" className="form-control create" id="price" step = "0.01"/>
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
