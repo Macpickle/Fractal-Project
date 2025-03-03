@@ -87,7 +87,7 @@ function Modify({handleModify, handleDisplay, id}) {
                     </div>
                     <div className="mb-3">
                         <label htmlFor="price" className="form-label">Price</label>
-                        <input type="number" className="form-control modify" id="price" />
+                        <input type="number" className="form-control modify" id="price" step = "0.01"/>
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
