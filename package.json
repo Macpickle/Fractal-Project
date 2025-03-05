@@ -3,6 +3,7 @@
     "concurrently": "^9.1.2"
   },
   "scripts": {
+    "install": "cd client && npm install && npm install ajv@latest ajv-keywords@latest",
     "start": "concurrently \"npm run backend\" \"npm run frontend\"",
     "backend": "cd server && python -m uvicorn main:app --reload",
     "frontend": "npm run start --prefix client"
