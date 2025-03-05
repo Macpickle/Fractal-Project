@@ -8,8 +8,6 @@ function Footer() {
                 </span>
                 <span className="float-end">
                     <a href="/login" className="text-muted">Login</a>
-                    <span className="px-2">|</span>
-                    <a href="/register" className="text-muted">Register</a>
                 </span>
             </div>
         </footer>
