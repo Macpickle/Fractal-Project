@@ -66,7 +66,7 @@ function Create({handleCreate, handleDisplay}) {
                     </div>
                     <div className="mb-3">
                         <label htmlFor="price" className="form-label">Price</label>
-                        <input type="number" className="form-control create" id="price" />
+                        <input pattern="^\d*(\.\d{0,2})?$" className="form-control create" id="price" />
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
