@@ -25,7 +25,7 @@ The goal is to create a functional prototype demonstrating these core features, 
 
 **To-Do**:
 Add back-end functionality to:
-- Edit existing items (e.g., update fields like name or description).
+- Edit existing items (e.g., update fields like name, description or stock).
 - Add new items (prompt user for inputs, validate them).
 - Validate inputs (e.g., check for non-empty fields).
 - Write logic to save any updates back to the original database file. 
