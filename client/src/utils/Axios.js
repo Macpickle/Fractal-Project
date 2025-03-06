@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// Axios interceptor to add the token to the request headers
-// this is likely how we will do it in the backend, need JWT or another token
+// Axios interceptor to add token to request headers, if token exists
+// this will be added to each request, will change depending on how we handle auth logic
 axios.interceptors.request.use(
     (config) => {
       const token = localStorage.getItem("token");
