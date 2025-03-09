@@ -1,6 +1,8 @@
 function Navbar() {
     return (
+        {/* https://getbootstrap.com/docs/4.0/components/navbar/ */},
         <nav className="navbar navbar-dark bg-dark box-shadow px-3">
+            {/* https://getbootstrap.com/docs/5.0/layout/containers/ */}
             <div className="container-fluid">
                 <img src="/images/logo.png" alt="logo" width="85" height="50" style={{filter: "invert(100%)"}} />
                 <ul className="navbar-nav ms-auto">

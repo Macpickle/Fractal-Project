@@ -1,17 +1,19 @@
 import AxiosRequest from "../utils/Axios";
 import { useEffect } from "react";
 
-function Modify({handleModify, handleDisplay, id}) {
+function Modify({handleModify, handleDisplay, card}) {
     const handleSubmit = (e) => {
         e.preventDefault();
-        const brand = document.getElementById("brand").value;
-        const name = document.getElementById("name").value;
+        const make = document.getElementById("make").value;
+        const model = document.getElementById("model").value;
         const description = document.getElementById("description").value;
         const price = document.getElementById("price").value;
+        const quantity = document.getElementById("quantity").value;
 
-        if (!brand || !name || !description || !price) {
+        // check if any fields are empty
+        if (!make || !model || !description || !price || !quantity) {
             document.getElementById("alert").classList.remove("d-none");
-            document.querySelectorAll(".modify").forEach((input) => {
+            document.querySelectorAll(".create").forEach((input) => {
                 if (!input.value) {
                     input.classList.add("is-invalid");
                 } else {
@@ -22,15 +24,17 @@ function Modify({handleModify, handleDisplay, id}) {
         }
 
         const data = {
-            brand: brand,
-            name: name,
+            make: make,
+            model: model,
             description: description,
             price: price,
-            id: id,
+            quantity: quantity,
+            id: card.id,
         }
 
+        // update the database
         AxiosRequest({
-            url: `/products/${id}`,
+            url: `/products/${card.id}`,
             method: "PUT",
             data: data,
         })
@@ -43,53 +47,94 @@ function Modify({handleModify, handleDisplay, id}) {
         });
     }
 
+    // load the product data into the form on mount
     useEffect(() => {
-        AxiosRequest({
-            url: `/products/${id}`,
-            method: "GET",
-            data: {},
-        })
-        .then((res) => {
-            document.getElementById("brand").value = res.data.brand;
-            document.getElementById("name").value = res.data.name;
-            document.getElementById("description").value = res.data.description;
-            document.getElementById("price").value = res.data.price;
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-    }, [id]);
+        document.getElementById("make").value = card.make;
+        document.getElementById("model").value = card.model;
+        document.getElementById("description").value = card.description;
+        document.getElementById("price").value = card.price;
+        document.getElementById("quantity").value = card.quantity
+    }, [card]);
 
     return (
-        <div className="position-fixed top-50 start-50 translate-middle z-3 bg-black bg-opacity-75 p-5 w-100 h-100">
-            <div className="container bg-white text-black p-5 w-50 position-relative rounded rounded-3 border border-secondary">
+        <div className="position-fixed top-50 start-50 translate-middle w-100 h-100 z-3 bg-black bg-opacity-75">
+            {/*https://getbootstrap.com/docs/5.0/layout/containers/*/}
+            <div className="container bg-white text-black p-3 position-relative rounded rounded-3 border border-secondary" style={{maxWidth: "500px", top: "50%", transform: "translateY(-50%)"}}>
+                {/*https://getbootstrap.com/docs/5.0/components/buttons/*/}
                 <button className="btn-close position-absolute top-0 end-0 m-3" onClick={() => handleDisplay()}></button>
                 <h1>Modify</h1>
-                <p className="text-muted m-0">Edit the form below to modify the product.</p>
+                <p className="text-muted m-0">Fill in the form below to modify the product.</p>
                 <hr className="mt-1"/>
 
+                {/*error message*/}
                 <p id="alert" className="alert alert-danger d-none p-1">Please fill in all fields.</p>
+
+                {/*https://getbootstrap.com/docs/5.0/forms/layout/*/}
                 <form onSubmit={handleSubmit} onChange={(e) => {
                     e.target.classList.remove("is-invalid")
                     document.getElementById("alert").classList.add("d-none");
                 }}>
                     <div className="mb-3">
-                        <label htmlFor="brand" className="form-label">Brand</label>
-                        <input type="text" className="form-control modify" id="brand" />
+                        <label htmlFor="make" className="form-label">Make</label>
+                        {/*https://getbootstrap.com/docs/5.0/forms/input/*/}
+                        <input 
+                            type="text" 
+                            className="form-control create" 
+                            id="make" 
+                            placeholder="eg. Pagani"
+                        />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="name" className="form-label">Name</label>
-                        <input type="text" className="form-control modify" id="name" />
+                        <label htmlFor="model" className="form-label">Model</label>
+                        {/*https://getbootstrap.com/docs/5.0/forms/input/*/}
+                        <input 
+                            type="text" 
+                            className="form-control create" 
+                            id="model" 
+                            placeholder="eg. Zonda F"
+                        />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="description" className="form-label">Description</label>
-                        <textarea className="form-control modify" id="description" rows="3" maxLength="200" ></textarea>
+                        {/*https://getbootstrap.com/docs/5.0/forms/input/*/}
+                        <textarea 
+                            className="form-control create" 
+                            id="description" 
+                            rows="3"
+                            maxLength="150" 
+                            placeholder="eg. A car that is fast and expensive."
+                        />
                     </div>
-                    <div className="mb-3">
-                        <label htmlFor="price" className="form-label">Price</label>
-                        <input type="number" className="form-control modify" id="price" step = "0.01"/>
+                    <div className="mb-3 d-flex">
+                        <div className="me-3 w-100">
+                            <label htmlFor="price" className="form-label">Price</label>
+                            {/*https://getbootstrap.com/docs/5.0/forms/input/*/}
+                            <input 
+                                type="number" 
+                                className="form-control create" 
+                                id="price" 
+                                step="0.01"
+                                pattern={"[0-9]+([0-9]+)?"}
+                                placeholder="eg. 1.00"
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="quantity" className="form-label">Quantity</label>
+                            {/*https://getbootstrap.com/docs/5.0/forms/input/*/}
+                            <input 
+                                type="number" 
+                                className="form-control create" 
+                                id="quantity" 
+                                step="1"
+                                pattern="[0-9]+"
+                                placeholder="eg. 100"
+                            />
+                        </div>
                     </div>
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    {/*https://getbootstrap.com/docs/5.0/components/buttons/*/}
+                    <div className = "d-flex justify-content-center gap-3">
+                        <button type="submit" className="btn btn-primary w-75">Submit</button>
+                    </div>
                 </form>
             </div>
         </div>

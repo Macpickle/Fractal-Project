@@ -22,3 +22,7 @@ label.form-label {
     margin-bottom: 0;
 }
 
+textarea.create {
+    resize: none;
+}
+
