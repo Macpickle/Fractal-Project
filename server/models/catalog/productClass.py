@@ -2,11 +2,12 @@
 from productModel import *
 
 class productClass:
-    def __init__(self, brand, name, price, description, time):
+    def __init__(self, make, model, price, description, time, quantity):
         self.id = 0
-        self.brand = brand
-        self.name = name
+        self.make = make
+        self.model = model
         self.price = price
         self.description = description
         self.time = time
+        self.quantity = quantity
 

@@ -5,7 +5,10 @@ import '../stylesheets/login.css';
 function AuthenticationWrapper({children, title}) {
     return (
         <section className="login-section">
+            {/*https://getbootstrap.com/docs/5.0/layout/containers/*/}
             <div className="container">
+
+                {/*https://getbootstrap.com/docs/5.0/layout/grid/*/}
                 <div className="row justify-content-center">
                     <div className="col-12 col-md-6 col-lg-4">
                         <div className="loginForm p-3 mb-5 pt-5 ">

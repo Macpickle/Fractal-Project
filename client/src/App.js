@@ -1,7 +1,6 @@
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
-//import RequiredAuth from './utils/requiredAuth';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
@@ -9,9 +8,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
-// main routing for app, user is required to login to access certain files.
-// dashboard has required auth of "admin" to access it.
-
+// main routing for app handles all routes
 function App() {
   return (
     <BrowserRouter>
