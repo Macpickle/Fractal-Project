@@ -64,7 +64,7 @@ class database:
         return self.dataSize
 
 # ERROR CLASSES
-from models.user.userModel import *
+from ..models.user.userModel import *
 
 class InvalidUsername(Exception):
     def __init__(self,user_name):
