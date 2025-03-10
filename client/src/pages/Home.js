@@ -6,19 +6,21 @@ import { useState, useEffect } from 'react';
 import AxiosRequest from '../utils/Axios';
 
 function Home() {
-    const [catalog, setCatalog] = useState([]);
-    const [filteredCatalog, setFilteredCatalog] = useState([]);
-    const [showCreate, setShowCreate] = useState(false);
-    const [showModify, setShowModify] = useState(false);
+    const [catalog, setCatalog] = useState([]); // stores the catalog of products
+    const [filteredCatalog, setFilteredCatalog] = useState([]); // stores the filtered catalog of products
+    const [showCreate, setShowCreate] = useState(false); // toggles the create product form
+    const [showModify, setShowModify] = useState(false); // toggles the modify product form
 
     // loads the catalog of products on mount
     useEffect(() => {
+        // makes a request to database API
         AxiosRequest({
             url: "/products",
             method: "GET",
             data: {},
         })
         .then((res) => {
+            // set the catalog of products
             setCatalog(res.data);
         })
         .catch((err) => {
@@ -28,12 +30,14 @@ function Home() {
 
     // deletes a product from the catalog
     const handleDelete = (id) => {
+        // makes a request to database API
         AxiosRequest({
             url: `/products/${id}`,
             method: "delete",
             data: {},
         })
         .then((res) => {
+            // remove the product from the catalog
             setCatalog(catalog.filter((item) => item.id !== id));
         })
         .catch((err) => {

@@ -39,6 +39,16 @@ class database:
         write_data_to_db(self.data, self.filename)
         return True
     
+    # Function modifies a dictionary entry in the database
+    def modifyData(self, entry):
+        for i in self.data:
+            if i["id"] == entry["id"]:
+                i.update(entry)
+                write_data_to_db(self.data, self.filename)
+                return True
+            
+        return False
+    
     # Function deletes a dictionary entry from the database
     def deleteData(self, entry):
         for i in self.data:
@@ -49,37 +59,7 @@ class database:
                 return True
             
         return False    
-    
-    # Function modifies a dictionary entry in the database
-    def modifyData(self, entry):
-        for i in self.data:
-            if i["id"] == entry["id"]:
-                i.update(entry)
-                write_data_to_db(self.data, self.filename)
-                return True
-            
-        return False
 
     def getDataSize(self):
         return self.dataSize
 
-# ERROR CLASSES
-from ..models.user.userModel import *
-
-class InvalidUsername(Exception):
-    def __init__(self,user_name):
-        self.user_name = user_name
-        self.message = f'Username {user_name} is not valid (Duplicate)'
-        super().__init__(self.message)
-        
-class LoginSuccess(Exception):
-    def __init__(self, user: userItem):
-        self.user_name = user.user_name
-        self.message = f'Success login {self.user_name}'
-        super().__init__(self.message)
-
-class LoginFail(Exception):
-    def __init__(self, user: userItem):
-        self.user_name = user.user_name
-        self.message = f'Failed login {self.user_name}'
-        super().__init__(self.message)

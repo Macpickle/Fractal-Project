@@ -16,7 +16,7 @@ async def read_product(id: int):
 
 @router.post("/products/")
 async def create_product(product: productItem):
-    data = product.dict()
+    data = product.model_dump()
     data.update({"time":str(datetime.now())})
     data.update({"id":productDatabase.getDataSize() + 1})
 
@@ -34,7 +34,7 @@ async def delete_product(id: int):
     
 @router.put("/products/{id}")
 async def update_product(id: int, product: productItem):
-    data = product.dict()
+    data = product.model_dump()
     data.update({"time":str(datetime.now())})
     data.update({"id":id})
 
