@@ -2,11 +2,12 @@ import database as db
 sampleDatabase = db.database("productData.json")
 sampleDatabase.getData()
 
-print(sampleDatabase.getData())
+# print(sampleDatabase.getData())
 
-sampleDatabase.sortData("model")
-print("\n")
-print(sampleDatabase.getData())
-sampleDatabase.sortData("price")
-print(sampleDatabase.getData())
-
+# sampleDatabase.sortData("model")
+# print("\n")
+# print(sampleDatabase.getData())
+# sampleDatabase.sortData("price")
+# print(sampleDatabase.getData())
+filt = sampleDatabase.filterData("make","Pagani")
+print(filt)

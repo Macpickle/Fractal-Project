@@ -65,6 +65,17 @@ class database:
         self.data = sorted(self.data, key=lambda x: x[id])
         write_data_to_db(self.data, self.filename)
         return True
+
+    #takes in parameter and type
+    def filterData(self, filter, type):
+        data = self.getData()
+        filteredData = []
+        dataSize =self.getDataSize()
+        for x in range(dataSize):
+            if(data[x][filter] == type):
+                filteredData.append(data[x])
+        return filteredData
+
     
     def getDataSize(self):
         return self.dataSize
