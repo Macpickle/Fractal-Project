@@ -45,12 +45,43 @@ function Home() {
         });
     }
 
+    // sorts catalog based on value
+    const handleSort = (e) => {
+        const value = e.target.value;
+
+        //make api call here (or after)
+        //make api call here
+        //make api call here
+        //make api call here
+
+        // sorting min to max
+        switch (value) {
+            case "make":
+                setFilteredCatalog([...filteredCatalog].sort((a, b) => a.make.localeCompare(b.make)));
+                break;
+            case "model":
+                setFilteredCatalog([...filteredCatalog].sort((a, b) => a.model.localeCompare(b.model)));
+                break;
+            case "price":
+                setFilteredCatalog([...filteredCatalog].sort((a, b) => a.price - b.price));
+                break;
+            case "quantity":
+                setFilteredCatalog([...filteredCatalog].sort((a, b) => a.quantity - b.quantity));
+                break;
+            case "time":
+                setFilteredCatalog([...filteredCatalog].sort((a, b) => new Date(a.time) - new Date(b.time)));
+                break;
+            default:
+                break;
+        }
+    }
+
     // updates the catalog with the search results, search through Make and Model
     const handleSearch = (e) => {
         const value = e;
 
-        // only filter if the search value is greater than 2 characters
-        if (value.length < 2) {
+        // only filter if the search value is greater than 1 character
+        if (value.length < 1) {
             setFilteredCatalog(catalog);
             return;
         }
@@ -115,10 +146,12 @@ function Home() {
                         </div>
                         <div className="col-md-3 col-sm-8 mb-2">
                             {/*https://getbootstrap.com/docs/4.0/components/forms/*/}
-                            <select className="form-control" onChange={(e) => console.log(e.target.value)}>
+                            <select className="form-control" onChange={(e) => handleSort(e)}>
                                 <option value="" default>Sort by...</option>
-                                <option value="brand">Brand</option>
+                                <option value="make">Make</option>
+                                <option value="model">Model</option>
                                 <option value="price">Price</option>
+                                <option value="quantity">Quantity</option>
                                 <option value="time">Time of Add</option>
                             </select>
                         </div>
