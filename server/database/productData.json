@@ -3,9 +3,45 @@
     "make": "Pagani",
     "model": "Zonda F",
     "price": 123.0,
-    "description": "qwe",
-    "time": "2025-03-09 20:52:27.342793",
-    "quantity": 123,
+    "description": "a fast car",
+    "time": "2025-03-10 10:31:26.506829",
+    "quantity": 3,
     "id": 1
+  },
+  {
+    "make": "Ford",
+    "model": "F-150",
+    "price": 4844884.0,
+    "description": "An awesome truck\n",
+    "time": "2025-03-10 10:24:02.688946",
+    "quantity": 1,
+    "id": 2
+  },
+  {
+    "make": "Porsche",
+    "model": "911 Turbo",
+    "price": 122232.0,
+    "description": "cool car",
+    "time": "2025-03-10 10:05:59.905285",
+    "quantity": 1,
+    "id": 3
+  },
+  {
+    "make": "Pagani",
+    "model": "Huayra R",
+    "price": 10000000.0,
+    "description": "fast",
+    "time": "2025-03-10 09:35:58.702379",
+    "quantity": 1,
+    "id": 4
+  },
+  {
+    "make": "Pagani",
+    "model": "Huayra BC",
+    "price": 187654.0,
+    "description": "fast car",
+    "time": "2025-03-10 10:36:02.363265",
+    "quantity": 10,
+    "id": 5
   }
 ]
