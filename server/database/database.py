@@ -62,8 +62,9 @@ class database:
 
     # Function to sort data by id
     def sortData(self,id):
-        self.data = sorted(self.data, key=lambda x: x[id])
-        write_data_to_db(self.data, self.filename)
+        data = self.getData()
+        data.sort(key=lambda x: x[id])
+        write_data_to_db(data, self.filename)
         return True
 
     #takes in parameter and type

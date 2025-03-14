@@ -45,6 +45,10 @@ async def update_product(id: int, product: productItem):
     else:
         return {"message":"Product not found"}
     
-@router.put("/products/{sort}")
-async def update_Sort(id: str):
-    return productDatabase.sortData(id)
+@router.post("/products/sort")
+async def update_Sort(sort: dict):
+    sort_type = sort.get("sort")
+    if sort_type:
+        return productDatabase.sortData(sort_type)
+    else:
+        return {"message": "Invalid sort type"}

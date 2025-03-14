@@ -50,11 +50,9 @@ function Home() {
         const value = e.target.value;
 
         AxiosRequest({
-            url: `/products/sort/${value}`,
-            method: "put",
-            data: {},
-        }).then(() => {
-            console.log("success");
+            url: "/products/sort",
+            method: "post",
+            data: {sort: value},
         }).catch((err) => {
             console.log(err);
         })
