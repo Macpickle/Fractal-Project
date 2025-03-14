@@ -49,10 +49,15 @@ function Home() {
     const handleSort = (e) => {
         const value = e.target.value;
 
-        //make api call here (or after)
-        //make api call here
-        //make api call here
-        //make api call here
+        AxiosRequest({
+            url: `/products/sort/${value}`,
+            method: "put",
+            data: {},
+        }).then(() => {
+            console.log("success");
+        }).catch((err) => {
+            console.log(err);
+        })
 
         // sorting min to max
         switch (value) {
@@ -147,7 +152,7 @@ function Home() {
                         <div className="col-md-3 col-sm-8 mb-2">
                             {/*https://getbootstrap.com/docs/4.0/components/forms/*/}
                             <select className="form-control" onChange={(e) => handleSort(e)}>
-                                <option value="" default>Sort by...</option>
+                                <option value="" default>Sort   by...</option>
                                 <option value="make">Make</option>
                                 <option value="model">Model</option>
                                 <option value="price">Price</option>

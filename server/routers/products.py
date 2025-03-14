@@ -44,3 +44,7 @@ async def update_product(id: int, product: productItem):
         return {"message":"Product updated", "data":data}
     else:
         return {"message":"Product not found"}
+    
+@router.put("/products/{sort}")
+async def update_Sort(id: str):
+    return productDatabase.sortData(id)
