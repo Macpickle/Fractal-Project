@@ -80,7 +80,3 @@ class database:
     
     def getDataSize(self):
         return self.dataSize
-    
-    def getData(self):
-        return read_data_from_db(self.filename)
-
