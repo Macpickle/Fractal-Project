@@ -12,6 +12,8 @@ class TestDatabaseMethods(unittest.TestCase):
             "price": 0.0,
             "description": "test_description",
             "quantity": 0,
+            "color": "test_color",
+            "carType": "test_type"
         }
 
     def test_getData(self):

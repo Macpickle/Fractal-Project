@@ -7,3 +7,5 @@ class productItem(BaseModel):
     description: str | None = None
     time: str | None = None
     quantity: int | None = 0
+    color: str | None = None
+    carType: str | None = None
