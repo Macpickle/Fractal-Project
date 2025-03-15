@@ -5,12 +5,14 @@ function Create({handleCreate, handleDisplay}) {
         e.preventDefault();
         const make = document.getElementById("make").value;
         const model = document.getElementById("model").value;
+        const color = document.getElementById("color").value;
+        const carType = document.getElementById("carType").value;
         const description = document.getElementById("description").value;
         const price = document.getElementById("price").value;
         const quantity = document.getElementById("quantity").value;
 
         // check if any fields are empty
-        if (!make || !model || !description || !price || !quantity) {
+        if (!make || !model || !description || !price || !quantity || !color || !carType) {
             document.getElementById("alert").classList.remove("d-none");
             document.querySelectorAll(".create").forEach((input) => {
                 if (!input.value) {
@@ -32,6 +34,8 @@ function Create({handleCreate, handleDisplay}) {
                 description: description,
                 price: price,
                 quantity: quantity,
+                color: color,
+                carType: carType
             },
         })
         .then((res) => {
@@ -61,26 +65,52 @@ function Create({handleCreate, handleDisplay}) {
                     e.target.classList.remove("is-invalid")
                     document.getElementById("alert").classList.add("d-none");
                 }}>
-                    <div className="mb-3">
-                        <label htmlFor="make" className="form-label">Make</label>
-                        {/*https://getbootstrap.com/docs/5.0/forms/input/*/}
-                        <input 
-                            type="text" 
-                            className="form-control create" 
-                            id="make" 
-                            placeholder="eg. Pagani"
-                        />
+                    <div className="d-flex flex-row">
+                        <div className = "mb-3 w-100 me-3">
+                            <label htmlFor="make" className="form-label">Make</label>
+                            {/*https://getbootstrap.com/docs/5.0/forms/input/*/}
+                            <input 
+                                type="text" 
+                                className="form-control create" 
+                                id="make" 
+                                placeholder="eg. Pagani"
+                            />
+                        </div>
+                        <div className="mb-3 w-100">
+                            <label htmlFor="model" className="form-label">Model</label>
+                            {/*https://getbootstrap.com/docs/5.0/forms/input/*/}
+                            <input 
+                                type="text" 
+                                className="form-control create" 
+                                id="model" 
+                                placeholder="eg. Zonda F"
+                            />
+                        </div>
                     </div>
-                    <div className="mb-3">
-                        <label htmlFor="model" className="form-label">Model</label>
-                        {/*https://getbootstrap.com/docs/5.0/forms/input/*/}
-                        <input 
-                            type="text" 
-                            className="form-control create" 
-                            id="model" 
-                            placeholder="eg. Zonda F"
-                        />
+
+                    <div className="d-flex flex-row">
+                        <div className = "mb-3 w-100 me-3">
+                            <label htmlFor="color" className="form-label">Colour</label>
+                            {/*https://getbootstrap.com/docs/5.0/forms/input/*/}
+                            <input 
+                                type="text" 
+                                className="form-control create" 
+                                id="color" 
+                                placeholder="eg. Red"
+                            />
+                        </div>
+                        <div className="mb-3 w-100">
+                            <label htmlFor="carType" className="form-label">Vehicle Type</label>
+                            {/*https://getbootstrap.com/docs/5.0/forms/input/*/}
+                            <input 
+                                type="text" 
+                                className="form-control create" 
+                                id="carType" 
+                                placeholder="eg. Sports Car"
+                            />
+                        </div>
                     </div>
+                    
                     <div className="mb-3">
                         <label htmlFor="description" className="form-label">Description</label>
                         {/*https://getbootstrap.com/docs/5.0/forms/input/*/}
