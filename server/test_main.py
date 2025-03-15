@@ -34,6 +34,7 @@ def test_create_product():
 # test read product by ID
 def test_read_product():
     response = client.get(f"/products/{len(products)}")
+    print(response.json())
     assert response.status_code == 200
     assert response.json() != None
 
