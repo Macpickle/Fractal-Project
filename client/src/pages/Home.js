@@ -49,6 +49,7 @@ function Home() {
     const handleSort = (e) => {
         const value = e.target.value;
 
+        // make request to backend, this handles sorting of the database
         AxiosRequest({
             url: "/products/sort",
             method: "post",
@@ -180,14 +181,29 @@ function Home() {
                                 <div className="card">
                                     <div className="card-body">
                                         <input type="hidden" value={item._id} />
+
                                         <div className="card-title d-flex justify-content-between align-items-center mb-0">
-                                            <h5 className="mb-0" dangerouslySetInnerHTML={{__html: `${item.make} ${item.model}`}}></h5>
+                                            <div className="d-flex flex-row align-items-center gap-2">
+                                                <h5 dangerouslySetInnerHTML={{__html: item.make}}></h5>
+                                                <h6 className="card-subtitle text-muted" dangerouslySetInnerHTML={{__html: item.model}}></h6>
+                                            </div>
+
                                             <p className="mb-0">x{item.quantity} in stock</p>
                                         </div>
-                                        <hr />
-                                        <p className="card-text">{item.description}</p>
-                                        <p className="card-text">Price: ${item.price}</p>
-                                        <p className="card-text">Time: {item.time}</p>
+                                        <hr className="mt-0"/>
+
+                                        <div className="d-flex flex-row align-items-center gap-1 mb-1">
+                                            <h6 className="card-subtitle">{item.color}</h6>
+                                            <h6 className="card-subtitle">{item.carType}</h6>
+                                        </div>
+                                        <p>{item.description}</p>
+
+                                        <div className="d-flex justify-content-between align-items-center mb-2">
+                                            <h6 className="card-subtitle text-muted">${item.price.toLocaleString()}</h6>
+                                            <p className="card-subtitle text-muted">{new Date(item.time).toLocaleString()}</p>
+                                        </div>
+
+
                                         <div className="d-flex gap-1">
                                             {/*https://getbootstrap.com/docs/4.0/components/buttons/*/}
                                             <button className="btn btn-secondary" onClick={() => setShowModify(item)}>Modify</button>

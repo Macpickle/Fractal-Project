@@ -12,7 +12,8 @@ async def read_products():
 
 @router.get("/products/{id}")
 async def read_product(id: int):
-    return productDatabase.getData(id)
+    print(productDatabase.getData(id))
+    return productDatabase.getData(id) or {"message":"Product not found"}
 
 @router.post("/products/")
 async def create_product(product: productItem):
