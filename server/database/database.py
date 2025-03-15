@@ -60,6 +60,27 @@ class database:
             
         return False    
 
+    # Function to sort data by id
+    def sortData(self,id):
+        data = self.getData()
+        data.sort(key=lambda x: x[id])
+        write_data_to_db(data, self.filename)
+        return True
+
+    #takes in parameter and type
+    def filterData(self, filter, type):
+        data = self.getData()
+        filteredData = []
+        dataSize =self.getDataSize()
+        for x in range(dataSize):
+            if(data[x][filter] == type):
+                filteredData.append(data[x])
+        return filteredData
+
+    
     def getDataSize(self):
         return self.dataSize
+    
+    def getData(self):
+        return read_data_from_db(self.filename)
 
