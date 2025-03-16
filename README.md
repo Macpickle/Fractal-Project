@@ -1,3 +1,4 @@
+
 # Catalog Management System
 
 CSCI 2040U - Software Design and Analysis
@@ -20,30 +21,38 @@ A simple catalog management system that allows users to manage a list of items s
 - Search Functionality 
     - Users can search for products by relevance.
 
-# Setup Instructions
-### Install Required Software
-We used React and FastAPI for our techstack, so there is some required software. Please install the following onto your machine to run it:
-- Node.JS
-- Python
+# How to run - BUILD
+These running instructions are specific to the build branch, for Windows systems to allow new developers to run our application. Please follow the steps to begin the application:
 
-###  Clone the Repository
+### Clone the Repository
 ```
-git clone https://github.com/Macpickle/Fractal-Project.git
+git clone https://github.com/Macpickle/Fractal-Project.git <project name>
+cd <project name>
 ```
 
-###  Install Dependencies
-We are using Concurrently, which means the whole site can be ran by a single command. Run the following in the root directory to install all dependencies:
+## Setup
+We are using React and Fast.api as our techstack, so please install and run the following commands on your machine to set up the server
+
+### Download dependencies for server
+Please install [Python](https://www.python.org/downloads/) & [Uvicorn](https://www.uvicorn.org/) to your local machine if it hasn't been installed already
 ```
-npm install
+cd server
+./run.bat
 ```
 
-### Run the Application
+### Download dependencies for client
+Please install [Node.JS](https://nodejs.org/en) to your local machine if it hasn't been installed already
 ```
-npm start
+cd ../client
+./run.bat
 ```
 
-### Access the Application
-The application runs off 2 ports, you can find them here:
-- Frontend: http://localhost:3000/
-- Backend: http://localhost:8000/
+## Running the application
+The application should be ready to load, please run and wait to start the application:
+```
+cd ..
+./start.bat
+```
+
+
 
