@@ -1,11 +1,57 @@
 [
   {
-    "make": "qwe",
-    "model": "qwe",
-    "price": 123.0,
-    "description": "qwe",
-    "time": "2025-03-14 22:41:44.677582",
-    "quantity": 123,
+    "make": "Pagani",
+    "model": "Zonda F",
+    "price": 12220210.0,
+    "description": "A fast purple car.",
+    "time": "2025-03-14 23:36:14.923765",
+    "quantity": 1,
+    "color": "Dark Purple ",
+    "carType": "Hyper Car",
     "id": 1
+  },
+  {
+    "make": "Bugatti",
+    "model": "Chiron",
+    "price": 30000000.0,
+    "description": "one of the fastest cars in the world",
+    "time": "2025-03-14 23:21:25.795094",
+    "quantity": 2,
+    "color": "Blue & Black",
+    "carType": "Hyper Car",
+    "id": 3
+  },
+  {
+    "make": "Honda",
+    "model": "Prelude",
+    "price": 8000.0,
+    "description": "A really nice car",
+    "time": "2025-03-14 23:22:57.476537",
+    "quantity": 12,
+    "color": "Red",
+    "carType": "Sports car",
+    "id": 5
+  },
+  {
+    "make": "Ford",
+    "model": "F-150",
+    "price": 40000.0,
+    "description": "A large truck",
+    "time": "2025-03-14 23:20:41.773870",
+    "quantity": 22,
+    "color": "White",
+    "carType": "Truck",
+    "id": 2
+  },
+  {
+    "make": "Honda",
+    "model": "Odyssey",
+    "price": 7000.0,
+    "description": "a very reliable car",
+    "time": "2025-03-14 23:22:29.868360",
+    "quantity": 34,
+    "color": "Grey",
+    "carType": "Minivan",
+    "id": 4
   }
 ]
