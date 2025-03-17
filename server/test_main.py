@@ -13,6 +13,8 @@ products = client.get("/products").json()
 sampleProduct = {
     "make": "test_make",
     "model": "test_model",
+    "color": "test_color",
+    "carType": "test_carType",
     "price": 0.0,
     "description": "test_description",
     "quantity": 0,
@@ -34,7 +36,6 @@ def test_create_product():
 # test read product by ID
 def test_read_product():
     response = client.get(f"/products/{len(products)}")
-    print(response.json())
     assert response.status_code == 200
     assert response.json() != None
 
