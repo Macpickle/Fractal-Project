@@ -26,12 +26,18 @@ class database:
 
     # Function returns a list of dictionary entries
     def getData(self, id=None):
-        if id:
-            print(id)
+        if id is not None:
             for i in self.data:
                 if i["id"] == id:
                     return i
         return self.data
+    
+    def getDatabyID(self, id):
+        for i in self.data:
+            if i["id"] == id:
+                return i
+        return None
+    
     
     # Function adds a dictionary entry to the database
     def addData(self, entry):
@@ -54,7 +60,6 @@ class database:
     # Function deletes a dictionary entry from the database
     def deleteData(self, entry):
         for i in self.data:
-            print(i)
             if i["id"] == entry["id"]:
                 self.data.remove(i)
                 self.dataSize -= 1
