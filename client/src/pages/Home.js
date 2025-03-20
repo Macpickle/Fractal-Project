@@ -10,6 +10,9 @@ function Home() {
     const [filteredCatalog, setFilteredCatalog] = useState([]); // stores the filtered catalog of products
     const [showCreate, setShowCreate] = useState(false); // toggles the create product form
     const [showModify, setShowModify] = useState(false); // toggles the modify product form
+    
+    // user entry
+    const LoggedIn = localStorage.getItem("LoggedIn") || "";
 
     // loads the catalog of products on mount
     useEffect(() => {
@@ -203,12 +206,13 @@ function Home() {
                                             <p className="card-subtitle text-muted">{new Date(item.time).toLocaleString()}</p>
                                         </div>
 
-
+                                        { (LoggedIn) && (
                                         <div className="d-flex gap-1">
                                             {/*https://getbootstrap.com/docs/4.0/components/buttons/*/}
-                                            <button className="btn btn-secondary" onClick={() => setShowModify(item)}>Modify</button>
-                                            <button className="btn btn-danger" onClick={() => handleDelete(item.id)}>Delete</button>
+                                                <button className="btn btn-secondary" onClick={() => setShowModify(item)}>Modify</button>
+                                                <button className="btn btn-danger" onClick={() => handleDelete(item.id)}>Delete</button>
                                         </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>
