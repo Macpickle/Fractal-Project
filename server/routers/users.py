@@ -25,24 +25,24 @@ def index():
 async def users_register(user: userItem):
     userNameList = userDatabase.getEntry("user_name")
     if(user.user_name.lower() in [name.lower() for name in userNameList]):
-        return InvalidUsername(user.user_name)
+        return {"message": "User name already in use"}
     else:
         items = userDatabase.getData()
         items.append(user.model_dump())
         write_data_to_db(data=items,filename=userDatabase.filename)
         print(f'Added user {user.user_name}')
-        return LoginSuccess
+        return {"message": "Account registered"}
 
 @router.post("/users/")
 async def users_login(user: userItem):
     userDict = userDatabase.getUser() 
     if(len(userDict) == 0):
-        return InvalidUsername
+        return {"message": "Invalid username"}
     else:
         if(user.user_pass == userDict['user_pass']):
-            return LoginSuccess
+            return {"message": "Login success"}
         
-    return LoginFail
+    return {"message": "Login fail"}
 
 
     
