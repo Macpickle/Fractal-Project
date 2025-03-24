@@ -26,3 +26,12 @@ textarea.create {
     resize: none;
 }
 
+.custom-dropdown {
+    width: 100%;
+    text-align: left;
+    padding: 5px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid grey;
+    background: transparent;
+}

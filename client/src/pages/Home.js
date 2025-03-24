@@ -4,6 +4,7 @@ import Create from '../components/Create';
 import Modify from '../components/Modify';
 import { useState, useEffect } from 'react';
 import AxiosRequest from '../utils/Axios';
+import SideNav from '../components/Sidenav';
 
 function Home() {
     const [catalog, setCatalog] = useState([]); // stores the catalog of products
@@ -52,33 +53,51 @@ function Home() {
     const handleSort = (e) => {
         const value = e.target.value;
 
-        // make request to backend, this handles sorting of the database
-        AxiosRequest({
-            url: "/products/sort",
-            method: "post",
-            data: {sort: value},
-        }).catch((err) => {
-            console.log(err);
-        })
-
-        // sorting min to max
         switch (value) {
-            case "make":
-                setFilteredCatalog([...filteredCatalog].sort((a, b) => a.make.localeCompare(b.make)));
-                break;
-            case "model":
-                setFilteredCatalog([...filteredCatalog].sort((a, b) => a.model.localeCompare(b.model)));
-                break;
-            case "price":
+            case "price-low":
                 setFilteredCatalog([...filteredCatalog].sort((a, b) => a.price - b.price));
                 break;
-            case "quantity":
-                setFilteredCatalog([...filteredCatalog].sort((a, b) => a.quantity - b.quantity));
+            case "price-high":
+                setFilteredCatalog([...filteredCatalog].sort((a, b) => b.price - a.price));
                 break;
-            case "time":
+            case "time-low":
+                setFilteredCatalog([...filteredCatalog].sort((a, b) => new Date(b.time) - new Date(a.time)));
+                break;
+            case "time-high":
                 setFilteredCatalog([...filteredCatalog].sort((a, b) => new Date(a.time) - new Date(b.time)));
                 break;
             default:
+                setFilteredCatalog(catalog === filteredCatalog ? catalog : filteredCatalog);
+                break;
+        }
+    }
+
+    // filters catalog based on value
+    const handleFilter = (type, value) => {
+        if (!value) {
+            setFilteredCatalog(catalog);
+            return;
+        }
+
+        switch (type) {
+            case "make":
+                setFilteredCatalog(catalog.filter((item) => item.make === value));
+                break;
+            case "model":
+                setFilteredCatalog(catalog.filter((item) => item.model === value));
+                break;
+            case "type":
+                setFilteredCatalog(catalog.filter((item) => item.carType === value));
+                break;
+            case "color":
+                setFilteredCatalog(catalog.filter((item) => item.color === value));
+                break;
+            case "price":
+                const [min, max] = value;
+                setFilteredCatalog(catalog.filter((item) => item.price >= min && item.price <= max));
+                break;
+            default:
+                setFilteredCatalog(catalog);
                 break;
         }
     }
@@ -132,94 +151,100 @@ function Home() {
             <Navbar>
                 <li>Home</li>
             </Navbar>
-            {/*https://getbootstrap.com/docs/5.0/layout/containers/*/}
-            <main className="container min-vh-100">
-                { showModify && <Modify 
-                    handleModify={handleModify} 
-                    handleDisplay={() => setShowModify(!showModify)} 
-                    card={showModify}
-                    /> 
-                }
-                <div className="container-fluid mt-3">
 
-                    {/*https://getbootstrap.com/docs/4.0/layout/grid/*/}
-                    <div className="row mb-3">
-                        <div className="col-md-7 col-sm-12 mb-2">
-                            <input type="text" 
-                                className="form-control" 
-                                placeholder="Search..." 
-                                onChange={(e) => handleSearch(e.target.value)}
-                            />
-                        </div>
-                        <div className="col-md-3 col-sm-8 mb-2">
-                            {/*https://getbootstrap.com/docs/4.0/components/forms/*/}
-                            <select className="form-control" onChange={(e) => handleSort(e)}>
-                                <option value="" default>Sort   by...</option>
-                                <option value="make">Make</option>
-                                <option value="model">Model</option>
-                                <option value="price">Price</option>
-                                <option value="quantity">Quantity</option>
-                                <option value="time">Time of Add</option>
-                            </select>
-                        </div>
-                        <div className="col-md-2 col-sm-4">
-                            <button className="btn btn-secondary w-100" onClick={() => setShowCreate(!showCreate)}>
-                                Create
-                            </button>
-                            { showCreate && <Create 
-                                handleCreate={handleCreate} 
-                                handleDisplay={() => setShowCreate(!showCreate)} 
+            <div className="container-fluid bg-light d-flex flex-row">
+                <SideNav catalog={catalog} handleFilter={handleFilter}/>
+
+                {/*https://getbootstrap.com/docs/5.0/layout/containers/*/}
+                <main className="container min-vh-100 p-0 m-0">
+                    { showModify && <Modify 
+                        handleModify={handleModify} 
+                        handleDisplay={() => setShowModify(!showModify)} 
+                        card={showModify}
+                        /> 
+                    }
+                    <div className="container-fluid mt-3">
+
+                        {/*https://getbootstrap.com/docs/4.0/layout/grid/*/}
+                        <div className="row mb-3">
+                            <div className="col-md-8 col-sm-12 mb-2">
+                                <input type="text" 
+                                    className="form-control" 
+                                    placeholder="Search..." 
+                                    onChange={(e) => handleSearch(e.target.value)}
                                 />
-                            }
+                            </div>
+                            <div className="col-md-2 col-sm-8 mb-2">
+                                {/*https://getbootstrap.com/docs/4.0/components/forms/*/}
+                                <select className="form-control" onChange={(e) => handleSort(e)}>
+                                    <option value="" default>Sort   by...</option>
+                                    <option value="price-low">Price: Low to High</option>
+                                    <option value="price-high">Price: High to Low</option>
+                                    <option value="time-low">Time: Newest</option>
+                                    <option value="time-high">Time: Oldest</option>
+                
+                                </select>
+                            </div>
+
+                            <div className="col-md-2 col-sm-4">
+                                <button className="btn btn-secondary w-100" onClick={() => setShowCreate(!showCreate)}>
+                                    Create
+                                </button>
+                                { showCreate && <Create 
+                                    handleCreate={handleCreate} 
+                                    handleDisplay={() => setShowCreate(!showCreate)} 
+                                    />
+                                }
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div className="container-fluid">
-                    <div className="row">
-                        {/*https://getbootstrap.com/docs/4.0/components/card/*/}
-                        {/* this is where cars are displayed */}
-                        {filteredCatalog.map((item) => (
-                            <div key={item.id} className="col-md-4 col-sm-6 mb-3">
-                                <div className="card">
-                                    <div className="card-body">
-                                        <input type="hidden" value={item._id} />
+                    <div className="container-fluid">
+                        <div className="row">
+                            {/*https://getbootstrap.com/docs/4.0/components/card/*/}
+                            {/* this is where cars are displayed */}
+                            {filteredCatalog.map((item) => (
+                                <div key={item.id} className="col-md-4 col-sm-6 mb-3">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <input type="hidden" value={item._id} />
 
-                                        <div className="card-title d-flex justify-content-between align-items-center mb-0">
-                                            <div className="d-flex flex-row align-items-center gap-2">
-                                                <h5 dangerouslySetInnerHTML={{__html: item.make}}></h5>
-                                                <h6 className="card-subtitle text-muted" dangerouslySetInnerHTML={{__html: item.model}}></h6>
+                                            <div className="card-title d-flex justify-content-between align-items-center mb-0">
+                                                <div className="d-flex flex-row align-items-center gap-2">
+                                                    <h5 dangerouslySetInnerHTML={{__html: item.make}}></h5>
+                                                    <h6 className="card-subtitle text-muted" dangerouslySetInnerHTML={{__html: item.model}}></h6>
+                                                </div>
+
+                                                <p className="mb-0">x{item.quantity} in stock</p>
+                                            </div>
+                                            <hr className="mt-0"/>
+
+                                            <div className="d-flex flex-row align-items-center gap-1 mb-1">
+                                                <h6 className="card-subtitle">{item.color}</h6>
+                                                <h6 className="card-subtitle">{item.carType}</h6>
+                                            </div>
+                                            <p>{item.description}</p>
+
+                                            <div className="d-flex justify-content-between align-items-center mb-2">
+                                                <h6 className="card-subtitle text-muted">${item.price.toLocaleString()}</h6>
+                                                <p className="card-subtitle text-muted">{new Date(item.time).toLocaleString()}</p>
                                             </div>
 
-                                            <p className="mb-0">x{item.quantity} in stock</p>
+                                            { (LoggedIn) && (
+                                            <div className="d-flex gap-1">
+                                                {/*https://getbootstrap.com/docs/4.0/components/buttons/*/}
+                                                    <button className="btn btn-secondary" onClick={() => setShowModify(item)}>Modify</button>
+                                                    <button className="btn btn-danger" onClick={() => handleDelete(item.id)}>Delete</button>
+                                            </div>
+                                            )}
                                         </div>
-                                        <hr className="mt-0"/>
-
-                                        <div className="d-flex flex-row align-items-center gap-1 mb-1">
-                                            <h6 className="card-subtitle">{item.color}</h6>
-                                            <h6 className="card-subtitle">{item.carType}</h6>
-                                        </div>
-                                        <p>{item.description}</p>
-
-                                        <div className="d-flex justify-content-between align-items-center mb-2">
-                                            <h6 className="card-subtitle text-muted">${item.price.toLocaleString()}</h6>
-                                            <p className="card-subtitle text-muted">{new Date(item.time).toLocaleString()}</p>
-                                        </div>
-
-                                        { (LoggedIn) && (
-                                        <div className="d-flex gap-1">
-                                            {/*https://getbootstrap.com/docs/4.0/components/buttons/*/}
-                                                <button className="btn btn-secondary" onClick={() => setShowModify(item)}>Modify</button>
-                                                <button className="btn btn-danger" onClick={() => handleDelete(item.id)}>Delete</button>
-                                        </div>
-                                        )}
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
-                </div>
-            </main>
+                </main>
+            </div>
             <Footer />
         </div>
     );
