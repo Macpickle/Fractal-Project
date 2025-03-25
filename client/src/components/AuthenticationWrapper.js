@@ -14,7 +14,7 @@ function AuthenticationWrapper({title}) {
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
 
-        const url = title === "Register" ? "/user/register" : "/user/login"; // set url to the relate to title
+        const url = title === "Register" ? "/users/register" : "/users/login"; // set url to the relate to title
 
         AxiosRequest({
             url: url,
@@ -25,22 +25,20 @@ function AuthenticationWrapper({title}) {
             }
         }).then((res) => {
             // set localstorage items to store user
-            if (res.data.LoggedIn && title === "Login") {
+            if (res.data.ok && title === "Login") {
                 localStorage.setItem("username", username);
-                localStorage.setItem("password", password);
                 localStorage.setItem("LoggedIn", true);
 
                 navigate("/");
+            } if (res.data.ok && title === "Register") {
+                navigate("/", {state: {message: "Account created successfully", username: username}});
+            }
+            else {
+                document.querySelector(".error").style.display = "block";
             }
         }).catch((err) => {
             console.log(err);
         });
-
-        // since no route, just hard code logging in, remove after routes are done
-        localStorage.setItem("username", username);
-        localStorage.setItem("password", password);
-        localStorage.setItem("LoggedIn", true);
-        navigate("/");
     }
 
     // reset display of error message
@@ -71,7 +69,7 @@ function AuthenticationWrapper({title}) {
                             
                              {/*TEMP DELETE FOR PROD*/}
                             <div className="error alert alert-danger" style={{display: "none"}}>
-                                <p className="mb-0">Invalid username or password</p>
+                                <p className="mb-0">{title === "Login" ? "Invalid username or password" : "Username already exists"}</p>
                             </div>
                     
                             <div className="mt-3 mb-5">

@@ -1,22 +1,11 @@
 [
   {
-    "make": "Bugatti",
-    "model": "Chiron",
-    "price": 30000000.0,
-    "description": "one of the fastest cars in the world",
-    "time": "2025-03-14 23:21:25.795094",
-    "quantity": 2,
-    "color": "Blue & Black",
-    "carType": "Hyper Car",
-    "id": 3
-  },
-  {
     "make": "Ford",
     "model": "F-150",
     "price": 40000.0,
     "description": "A large truck",
-    "time": "2025-03-17 09:51:10.435087",
-    "quantity": 21,
+    "time": "2025-03-23 23:01:38.106735",
+    "quantity": 3,
     "color": "White",
     "carType": "Truck",
     "id": 2
@@ -42,17 +31,6 @@
     "color": "Red",
     "carType": "Sports car",
     "id": 5
-  },
-  {
-    "make": "Pagani",
-    "model": "Zonda F",
-    "price": 12220210.0,
-    "description": "A fast purple car.",
-    "time": "2025-03-14 23:36:14.923765",
-    "quantity": 1,
-    "color": "Dark Purple ",
-    "carType": "Hyper Car",
-    "id": 1
   },
   {
     "make": "Tesla",
