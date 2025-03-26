@@ -4,6 +4,7 @@ import Create from '../components/Create';
 import Modify from '../components/Modify';
 import { useState, useEffect } from 'react';
 import AxiosRequest from '../utils/Axios';
+import { useLocation } from 'react-router-dom';
 import SideNav from '../components/Sidenav';
 
 function Home() {
@@ -11,6 +12,8 @@ function Home() {
     const [filteredCatalog, setFilteredCatalog] = useState([]); // stores the filtered catalog of products
     const [showCreate, setShowCreate] = useState(false); // toggles the create product form
     const [showModify, setShowModify] = useState(false); // toggles the modify product form
+    const [alert, setAlert] = useState(""); // toggles the alert message
+    const location = useLocation();
     
     // user entry
     const LoggedIn = localStorage.getItem("LoggedIn") || "";
@@ -144,10 +147,37 @@ function Home() {
 
     useEffect(() => {
         setFilteredCatalog(catalog);
-    }, [catalog]);
-    
+
+        if (location.state && location.state.message) {
+            setAlert(location.state.message); // set alert message
+            window.history.replaceState({}, ''); // reset state from URL
+
+            setTimeout(() => {
+                const alertPopup = document.querySelector(".alert-popup");
+                alertPopup.classList.add("slide-out");
+                setTimeout(() => {
+                    setAlert("");
+
+                }, 1000);
+            }, 3000);
+        }
+    }, [catalog, location.state, location]);
     return (
         <div className='bg-white min-vh-100'>
+            {
+                alert &&
+                <div className = "w-100 position-fixed" style={{zIndex: 1000}}>
+                    <div className="alert-popup slide-in">
+                        <div className="toast-header">
+                            <strong className="me-auto">Notification</strong>
+                            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={() => document.querySelector(".alert-popup").classList.add("slide-out")}></button>
+                        </div>
+                        <div className="toast-body">
+                            {alert}
+                        </div>
+                    </div>
+                </div>
+            }
             <Navbar>
                 <li>Home</li>
             </Navbar>
@@ -167,14 +197,14 @@ function Home() {
 
                         {/*https://getbootstrap.com/docs/4.0/layout/grid/*/}
                         <div className="row mb-3">
-                            <div className="col-md-8 col-sm-12 mb-2">
+                            <div className={`col-md-${localStorage.getItem("LoggedIn") ? "8" : "10"} col-sm-12 mb-2`}>
                                 <input type="text" 
                                     className="form-control" 
                                     placeholder="Search..." 
                                     onChange={(e) => handleSearch(e.target.value)}
                                 />
                             </div>
-                            <div className="col-md-2 col-sm-8 mb-2">
+                            <div className="col-md-2 col-sm-4 mb-2">
                                 {/*https://getbootstrap.com/docs/4.0/components/forms/*/}
                                 <select className="form-control" onChange={(e) => handleSort(e)}>
                                     <option value="" default>Sort   by...</option>
@@ -187,14 +217,17 @@ function Home() {
                             </div>
 
                             <div className="col-md-2 col-sm-4">
+                                {localStorage.getItem("LoggedIn") &&
                                 <button className="btn btn-secondary w-100" onClick={() => setShowCreate(!showCreate)}>
                                     Create
                                 </button>
+                                }
                                 { showCreate && <Create 
                                     handleCreate={handleCreate} 
                                     handleDisplay={() => setShowCreate(!showCreate)} 
                                     />
                                 }
+                                
                             </div>
                         </div>
                     </div>

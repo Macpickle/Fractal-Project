@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\dillp\Projects\Winter2025\Analysis\fractal_build\server\venv"
+VIRTUAL_ENV="C:\Users\dillp\Projects\Winter2025\Analysis\updatedfractal\server\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

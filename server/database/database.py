@@ -25,11 +25,19 @@ class database:
         self.dataSize = len(self.data)
 
     # Function returns a list of dictionary entries
-    def getData(self, id=None):
+    def getData(self, id=None, username=None):
         if id is not None:
             for i in self.data:
                 if i["id"] == id:
                     return i
+            return None
+        
+        if username is not None:
+            for i in self.data:
+                if i["username"] == username:
+                    return i
+            return None
+        
         return self.data
     
     def getDatabyID(self, id):
@@ -41,7 +49,6 @@ class database:
     
     # Function adds a dictionary entry to the database
     def addData(self, entry):
-        print(entry, self.data, self.filename)
         self.data.append(entry)
         self.dataSize += 1
         write_data_to_db(self.data, self.filename)
