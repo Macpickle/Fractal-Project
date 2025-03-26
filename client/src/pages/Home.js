@@ -136,8 +136,30 @@ function Home() {
     }
 
     // updates the catalog with a new product
-    const handleCreate = (data) => {
-        setCatalog([...catalog, data]);
+    const handleCreate = () => {
+        // makes a request to database API
+        AxiosRequest({
+            url: "/products",
+            method: "GET",
+            data: {},
+        })
+        .then((res) => {
+            // set the catalog of products
+            setCatalog(res.data);
+
+            setAlert("Product(s) added successfully!");
+            setTimeout(() => {
+                const alertPopup = document.querySelector(".alert-popup");
+                alertPopup.classList.add("slide-out");
+                setTimeout(() => {
+                    setAlert("");
+
+                }, 1000);
+            }, 3000);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
     }
 
     // updates the catalog with a modified product
@@ -162,6 +184,7 @@ function Home() {
             }, 3000);
         }
     }, [catalog, location.state, location]);
+
     return (
         <div className='bg-white min-vh-100'>
             {

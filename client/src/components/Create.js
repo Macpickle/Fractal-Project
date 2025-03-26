@@ -39,12 +39,44 @@ function Create({handleCreate, handleDisplay}) {
             },
         })
         .then((res) => {
-            handleCreate(res.data);
-            handleDisplay();
+            if (res.data.ok) {
+                handleCreate(res.data);
+                handleDisplay();
+            } else {
+                document.getElementById("exists").classList.remove("d-none");
+            }
         })
         .catch((err) => {
             console.log(err);
         });
+    }
+
+    const handleCSV = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        // make formdata object
+        const formData = new FormData();
+        formData.append("file", file);
+
+        // upload to server
+        AxiosRequest({
+            url: "/products/upload",
+            method: "POST",
+            data: formData,
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        })
+            .then((res) => {
+                if (res.data.ok) {
+                    handleCreate();
+                    handleDisplay();
+                }
+            })
+            .catch((err) => {
+                console.error("Error uploading file:", err);
+            });
     }
 
     return (
@@ -59,6 +91,7 @@ function Create({handleCreate, handleDisplay}) {
 
                 {/*error message*/}
                 <p id="alert" className="alert alert-danger d-none p-1">Please fill in all fields.</p>
+                <p id="exists" className="alert alert-danger d-none p-1">Product already exists.</p>
 
                 {/*https://getbootstrap.com/docs/5.0/forms/layout/*/}
                 <form onSubmit={handleSubmit} onChange={(e) => {
@@ -151,6 +184,24 @@ function Create({handleCreate, handleDisplay}) {
                     {/*https://getbootstrap.com/docs/5.0/components/buttons/*/}
                     <div className = "d-flex justify-content-center gap-3">
                         <button type="submit" className="btn btn-primary w-75">Submit</button>
+                        
+                        <button 
+                            type="button" 
+                            className="btn btn-secondary w-75" 
+                            onClick={() => document.getElementById("csvUpload").click()}
+                        >
+                            Upload CSV
+                        </button>
+                        <input 
+                            type="file" 
+                            id="csvUpload" 
+                            accept=".csv" 
+                            className="d-none" 
+                            onChange={(e) => {
+                                handleCSV(e);
+                                e.target.value = null;                                
+                            }}
+                        />
                     </div>
                 </form>
             </div>
