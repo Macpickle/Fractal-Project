@@ -49,11 +49,6 @@ class database:
     
     # Function adds a dictionary entry to the database
     def addData(self, entry):
-        filter_data = [(item["make"], item["model"]) for item in self.data]
-
-        if (entry["make"], entry["model"]) in filter_data:
-            return False
-        
         self.data.append(entry)
         self.dataSize += 1
         write_data_to_db(self.data, self.filename)

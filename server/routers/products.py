@@ -21,6 +21,10 @@ async def create_product(product: productItem):
     data.update({"time":str(datetime.now())})
     data.update({"id":productDatabase.getDataSize() + 1})
 
+    filter_data = [(item["make"], item["model"]) for item in productDatabase.data]
+    if (data["make"], data["model"]) in filter_data:
+        return {"ok": False, "message":"Product already exists"}
+
     success = productDatabase.addData(data)
     if not success:
         return {"ok": False, "message":"Product already exists"}
