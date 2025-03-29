@@ -13,6 +13,7 @@ function Home() {
     const [showCreate, setShowCreate] = useState(false); // toggles the create product form
     const [showModify, setShowModify] = useState(false); // toggles the modify product form
     const [alert, setAlert] = useState(""); // toggles the alert message
+    const [filterStack, setFilterStack] = useState([]); // stores the filter stack
     const location = useLocation();
     
     // user entry
@@ -78,32 +79,47 @@ function Home() {
     // filters catalog based on value
     const handleFilter = (type, value) => {
         if (!value) {
+            setFilterStack((prev) => prev.filter((item) => item.type !== type));
+            return;
+        }
+
+        // add the filter to the filter stack, remove duplicate types
+        setFilterStack((prev) => {
+            const newStack = prev.filter((item) => item.type !== type);
+            return [...newStack, { type, value }];
+        });
+    }
+
+    // updates the catalog with the filtered products
+    useEffect(() => {
+        if (filterStack.length === 0) {
             setFilteredCatalog(catalog);
             return;
         }
 
-        switch (type) {
-            case "make":
-                setFilteredCatalog(catalog.filter((item) => item.make === value));
-                break;
-            case "model":
-                setFilteredCatalog(catalog.filter((item) => item.model === value));
-                break;
-            case "type":
-                setFilteredCatalog(catalog.filter((item) => item.carType === value));
-                break;
-            case "color":
-                setFilteredCatalog(catalog.filter((item) => item.color === value));
-                break;
-            case "price":
-                const [min, max] = value;
-                setFilteredCatalog(catalog.filter((item) => item.price >= min && item.price <= max));
-                break;
-            default:
-                setFilteredCatalog(catalog);
-                break;
-        }
-    }
+        // filter the catalog based on the filter stack
+        const filtered = catalog.filter((item) => {
+            return filterStack.every((filter) => {
+                switch (filter.type) {
+                    case "make":
+                        return item.make === filter.value;
+                    case "model":
+                        return item.model === filter.value;
+                    case "type":
+                        return item.carType === filter.value;
+                    case "color":
+                        return item.color === filter.value;
+                    case "price":
+                        const [min, max] = filter.value;
+                        return item.price >= min && item.price <= max;
+                    default:
+                        return true;
+                }
+            });
+        });
+        setFilteredCatalog(filtered);
+    }, [filterStack, catalog]);
+    
 
     // updates the catalog with the search results, search through Make and Model
     const handleSearch = (e) => {
