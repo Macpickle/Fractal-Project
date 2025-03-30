@@ -25,12 +25,27 @@ class database:
         self.dataSize = len(self.data)
 
     # Function returns a list of dictionary entries
-    def getData(self, id=None):
-        if id:
+    def getData(self, id=None, username=None):
+        if id is not None:
             for i in self.data:
                 if i["id"] == id:
                     return i
+            return None
+        
+        if username is not None:
+            for i in self.data:
+                if i["username"] == username:
+                    return i
+            return None
+        
         return self.data
+    
+    def getDatabyID(self, id):
+        for i in self.data:
+            if i["id"] == id:
+                return i
+        return None
+    
     
     # Function adds a dictionary entry to the database
     def addData(self, entry):
@@ -60,6 +75,26 @@ class database:
             
         return False    
 
+    # Function to sort data by id
+    def sortData(self,id):
+        data = self.getData()
+        data.sort(key=lambda x: x[id])
+        write_data_to_db(data, self.filename)
+        return True
+
+    #takes in parameter and type
+    def filterData(self, filter, type):
+        data = self.getData()
+        filteredData = []
+        dataSize =self.getDataSize()
+        for x in range(dataSize):
+            if(data[x][filter] == type):
+                filteredData.append(data[x])
+        return filteredData
+
+    
     def getDataSize(self):
         return self.dataSize
+    
+    
 

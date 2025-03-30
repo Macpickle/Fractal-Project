@@ -5,12 +5,14 @@ function Create({handleCreate, handleDisplay}) {
         e.preventDefault();
         const make = document.getElementById("make").value;
         const model = document.getElementById("model").value;
+        const color = document.getElementById("color").value;
+        const carType = document.getElementById("carType").value;
         const description = document.getElementById("description").value;
         const price = document.getElementById("price").value;
         const quantity = document.getElementById("quantity").value;
 
         // check if any fields are empty
-        if (!make || !model || !description || !price || !quantity) {
+        if (!make || !model || !description || !price || !quantity || !color || !carType) {
             document.getElementById("alert").classList.remove("d-none");
             document.querySelectorAll(".create").forEach((input) => {
                 if (!input.value) {
@@ -32,15 +34,49 @@ function Create({handleCreate, handleDisplay}) {
                 description: description,
                 price: price,
                 quantity: quantity,
+                color: color,
+                carType: carType
             },
         })
         .then((res) => {
-            handleCreate(res.data);
-            handleDisplay();
+            if (res.data.ok) {
+                handleCreate(res.data);
+                handleDisplay();
+            } else {
+                document.getElementById("exists").classList.remove("d-none");
+            }
         })
         .catch((err) => {
             console.log(err);
         });
+    }
+
+    const handleCSV = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        // make formdata object
+        const formData = new FormData();
+        formData.append("file", file);
+
+        // upload to server
+        AxiosRequest({
+            url: "/products/upload",
+            method: "POST",
+            data: formData,
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        })
+            .then((res) => {
+                if (res.data.ok) {
+                    handleCreate();
+                    handleDisplay();
+                }
+            })
+            .catch((err) => {
+                console.error("Error uploading file:", err);
+            });
     }
 
     return (
@@ -55,32 +91,59 @@ function Create({handleCreate, handleDisplay}) {
 
                 {/*error message*/}
                 <p id="alert" className="alert alert-danger d-none p-1">Please fill in all fields.</p>
+                <p id="exists" className="alert alert-danger d-none p-1">Product already exists.</p>
 
                 {/*https://getbootstrap.com/docs/5.0/forms/layout/*/}
                 <form onSubmit={handleSubmit} onChange={(e) => {
                     e.target.classList.remove("is-invalid")
                     document.getElementById("alert").classList.add("d-none");
                 }}>
-                    <div className="mb-3">
-                        <label htmlFor="make" className="form-label">Make</label>
-                        {/*https://getbootstrap.com/docs/5.0/forms/input/*/}
-                        <input 
-                            type="text" 
-                            className="form-control create" 
-                            id="make" 
-                            placeholder="eg. Pagani"
-                        />
+                    <div className="d-flex flex-row">
+                        <div className = "mb-3 w-100 me-3">
+                            <label htmlFor="make" className="form-label">Make</label>
+                            {/*https://getbootstrap.com/docs/5.0/forms/input/*/}
+                            <input 
+                                type="text" 
+                                className="form-control create" 
+                                id="make" 
+                                placeholder="eg. Pagani"
+                            />
+                        </div>
+                        <div className="mb-3 w-100">
+                            <label htmlFor="model" className="form-label">Model</label>
+                            {/*https://getbootstrap.com/docs/5.0/forms/input/*/}
+                            <input 
+                                type="text" 
+                                className="form-control create" 
+                                id="model" 
+                                placeholder="eg. Zonda F"
+                            />
+                        </div>
                     </div>
-                    <div className="mb-3">
-                        <label htmlFor="model" className="form-label">Model</label>
-                        {/*https://getbootstrap.com/docs/5.0/forms/input/*/}
-                        <input 
-                            type="text" 
-                            className="form-control create" 
-                            id="model" 
-                            placeholder="eg. Zonda F"
-                        />
+
+                    <div className="d-flex flex-row">
+                        <div className = "mb-3 w-100 me-3">
+                            <label htmlFor="color" className="form-label">Colour</label>
+                            {/*https://getbootstrap.com/docs/5.0/forms/input/*/}
+                            <input 
+                                type="text" 
+                                className="form-control create" 
+                                id="color" 
+                                placeholder="eg. Red"
+                            />
+                        </div>
+                        <div className="mb-3 w-100">
+                            <label htmlFor="carType" className="form-label">Vehicle Type</label>
+                            {/*https://getbootstrap.com/docs/5.0/forms/input/*/}
+                            <input 
+                                type="text" 
+                                className="form-control create" 
+                                id="carType" 
+                                placeholder="eg. Sports Car"
+                            />
+                        </div>
                     </div>
+                    
                     <div className="mb-3">
                         <label htmlFor="description" className="form-label">Description</label>
                         {/*https://getbootstrap.com/docs/5.0/forms/input/*/}
@@ -121,6 +184,24 @@ function Create({handleCreate, handleDisplay}) {
                     {/*https://getbootstrap.com/docs/5.0/components/buttons/*/}
                     <div className = "d-flex justify-content-center gap-3">
                         <button type="submit" className="btn btn-primary w-75">Submit</button>
+                        
+                        <button 
+                            type="button" 
+                            className="btn btn-secondary w-75" 
+                            onClick={() => document.getElementById("csvUpload").click()}
+                        >
+                            Upload CSV
+                        </button>
+                        <input 
+                            type="file" 
+                            id="csvUpload" 
+                            accept=".csv" 
+                            className="d-none" 
+                            onChange={(e) => {
+                                handleCSV(e);
+                                e.target.value = null;                                
+                            }}
+                        />
                     </div>
                 </form>
             </div>

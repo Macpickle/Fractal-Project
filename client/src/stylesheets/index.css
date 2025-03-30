@@ -26,3 +26,66 @@ textarea.create {
     resize: none;
 }
 
+.custom-dropdown {
+    width: 100%;
+    text-align: left;
+    padding: 5px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid grey;
+    background: transparent;
+}
+
+.alert-popup {
+    position: absolute;
+    padding: 10px;
+    top: 10px;
+    right: 10px;
+    width: 300px;
+    height: auto;
+    z-index: 1000;
+    background: white;
+    border-radius: 5px;
+    color: black;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.slide-in {
+    animation: slide-in 0.5s forwards;
+}
+
+.slide-out {
+    animation: slide-out 0.5s forwards;
+}
+
+.toast-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 5px;
+    border-bottom: 1px solid #444;
+}
+
+.toast-body {
+    padding: 10px;
+    font-size: 14px;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateY(-150%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-out {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-150%);
+    }
+}
