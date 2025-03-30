@@ -1,5 +1,9 @@
 @echo off
 echo Starting the application...
 
-start cmd /c "cd server && run.bat"
-start cmd /c "cd client && run.bat"
+cd server
+call run.bat
+
+echo Server started. Now starting the client...
+cd ..\client
+call run.bat
