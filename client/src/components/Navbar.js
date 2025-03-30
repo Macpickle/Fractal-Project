@@ -1,3 +1,4 @@
+// navbar for the application, containing logo and login/logout buttons
 function Navbar() {
     const loggedIn = localStorage.getItem("LoggedIn");
 

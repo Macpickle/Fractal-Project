@@ -82,8 +82,12 @@ async def upload_csv(file: UploadFile):
         data = dict(zip(headers, content))
         data.update({"time":str(datetime.now())})
         data.update({"id":productDatabase.getDataSize() + 1})
-        productDatabase.addData(data)
 
+        filter_data = [(item["make"], item["model"]) for item in productDatabase.data]
+        if (data["make"], data["model"]) in filter_data:
+            continue
+        else:
+            productDatabase.addData(data)
     # return the new items
-    return {"ok": True}
+    return {"ok": True, "message":"Products added"}
     

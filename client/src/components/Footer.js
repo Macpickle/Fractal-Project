@@ -1,3 +1,4 @@
+// footer for the catalog
 function Footer() {
     return (
         {/* https://getbootstrap.com/docs/5.1/components/navbar/ */},
@@ -12,9 +13,6 @@ function Footer() {
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 >
                     Scroll to top
-                </span>
-                <span className="float-end">
-                    <a href="/login" className="text-muted">Login</a>
                 </span>
             </div>
         </footer>

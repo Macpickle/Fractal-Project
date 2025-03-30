@@ -1,18 +1,18 @@
 import json
+import os
 
 def read_data_from_db(filename):
     try:
         with open(filename, "r") as file:
-            data = json.load(file)
+            return json.load(file)
     except FileNotFoundError:
         print(f"Error reading {filename}")
         return []
-    return data
 
 def write_data_to_db(data,filename):
     try:
         with open(filename, "w") as file:
-            json.dump(data, file, indent=2)
+            json.dump(data, file, indent=4)
     except FileNotFoundError:
         print(f"Error writing to {filename}")
         return False
@@ -25,7 +25,7 @@ class database:
         self.dataSize = len(self.data)
 
     # Function returns a list of dictionary entries
-    def getData(self, id=None, username=None):
+    def getData(self, id=None, username=None):        
         if id is not None:
             for i in self.data:
                 if i["id"] == id:

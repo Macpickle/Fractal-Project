@@ -1,12 +1,15 @@
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import Create from '../components/Create';
-import Modify from '../components/Modify';
+import Create from './Create';
+import Modify from './Modify';
 import { useState, useEffect } from 'react';
 import AxiosRequest from '../utils/Axios';
 import { useLocation } from 'react-router-dom';
 import SideNav from '../components/Sidenav';
+import Toast from '../components/Toast';
 
+// main component for the home page
+// this is where the catalog of products are displayed
 function Home() {
     const [catalog, setCatalog] = useState([]); // stores the catalog of products
     const [filteredCatalog, setFilteredCatalog] = useState([]); // stores the filtered catalog of products
@@ -57,6 +60,7 @@ function Home() {
     const handleSort = (e) => {
         const value = e.target.value;
 
+        // check value of the select element
         switch (value) {
             case "price-low":
                 setFilteredCatalog([...filteredCatalog].sort((a, b) => a.price - b.price));
@@ -162,16 +166,8 @@ function Home() {
         .then((res) => {
             // set the catalog of products
             setCatalog(res.data);
-
-            setAlert("Product(s) added successfully!");
-            setTimeout(() => {
-                const alertPopup = document.querySelector(".alert-popup");
-                alertPopup.classList.add("slide-out");
-                setTimeout(() => {
-                    setAlert("");
-
-                }, 1000);
-            }, 3000);
+            setFilteredCatalog(res.data);
+            setAlert("Product(s) created successfully!");
         })
         .catch((err) => {
             console.log(err);
@@ -181,41 +177,22 @@ function Home() {
     // updates the catalog with a modified product
     const handleModify = (data) => {
         setCatalog(catalog.map((item) => item.id === data.id ? data : item));
+        setAlert("Product modified successfully!");
     }
 
     useEffect(() => {
         setFilteredCatalog(catalog);
 
         if (location.state && location.state.message) {
-            setAlert(location.state.message); // set alert message
             window.history.replaceState({}, ''); // reset state from URL
-
-            setTimeout(() => {
-                const alertPopup = document.querySelector(".alert-popup");
-                alertPopup.classList.add("slide-out");
-                setTimeout(() => {
-                    setAlert("");
-
-                }, 1000);
-            }, 3000);
+            setAlert(location.state.message);
         }
     }, [catalog, location.state, location]);
 
     return (
         <div className='bg-white min-vh-100'>
             {
-                alert &&
-                <div className = "w-100 position-fixed" style={{zIndex: 1000}}>
-                    <div className="alert-popup slide-in">
-                        <div className="toast-header">
-                            <strong className="me-auto">Notification</strong>
-                            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close" onClick={() => document.querySelector(".alert-popup").classList.add("slide-out")}></button>
-                        </div>
-                        <div className="toast-body">
-                            {alert}
-                        </div>
-                    </div>
-                </div>
+                alert && <Toast message={alert} onClose={() => setAlert("")} />
             }
             <Navbar>
                 <li>Home</li>

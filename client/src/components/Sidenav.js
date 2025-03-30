@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+
+// sidenav for filtering items in the catalog
 function SideNav({catalog, handleFilter}) {
     const [showPriceSlider, setShowPriceSlider] = useState(false);
     const maxPrice = Math.max(...catalog.map(item => item.price));
@@ -11,7 +13,7 @@ function SideNav({catalog, handleFilter}) {
     }, [maxPrice]);
     
     return (
-        <nav className="sidenav mt-3" style={{width: '250px'}}>
+        <nav className="sidenav mt-3 col-md-2 col-sm-1 d-none d-md-block">
             <h5 className="text-center">Filter</h5>
 
             <div className="col-md-12 col-sm-8 mb-2">
