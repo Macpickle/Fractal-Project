@@ -9,7 +9,7 @@ if not exist venv (
 
 call venv\Scripts\activate
 pip install --upgrade pip
-pip install fastapi
+pip install fastapi[all]
 pip install uvicorn
 pip install python-multipart
 
