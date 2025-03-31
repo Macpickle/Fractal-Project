@@ -82,6 +82,14 @@ function Home() {
 
     // filters catalog based on value
     const handleFilter = (type, value) => {
+        // check if the filter is reset
+        if (type === "reset") {
+            setFilterStack([]);
+            setFilteredCatalog(catalog);
+            return;
+        }
+
+        // check if the value is being removed
         if (!value) {
             setFilterStack((prev) => prev.filter((item) => item.type !== type));
             return;

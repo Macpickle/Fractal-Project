@@ -7,6 +7,18 @@ function SideNav({catalog, handleFilter}) {
     const [priceMin, setPriceMin] = useState(0);
     const [priceMax, setPriceMax] = useState(maxPrice);
 
+    const resetSelection = () => {
+        setPriceMin(0);
+        setPriceMax(maxPrice);
+        setShowPriceSlider(false);
+        
+        // change all selects to default value
+        const selects = document.querySelectorAll('.custom-dropdown');
+        selects.forEach(select => {
+            select.value = '';
+        });
+    }
+
     useEffect(() => {
         setPriceMin(0);
         setPriceMax(maxPrice);
@@ -16,6 +28,7 @@ function SideNav({catalog, handleFilter}) {
         <nav className="sidenav mt-3 col-md-2 col-sm-1 d-none d-md-block">
             <h5 className="text-center">Filter</h5>
 
+            {/* price slider dropdown */}
             <div className="col-md-12 col-sm-8 mb-2">
                 <button className="custom-dropdown text-left" onClick={() => setShowPriceSlider(!showPriceSlider)}>
                     Price
@@ -50,6 +63,8 @@ function SideNav({catalog, handleFilter}) {
                 )}
             </div>
 
+            {/* dropdowns for all filters, set is used to only show unique values */}
+            {/*https://getbootstrap.com/docs/4.0/components/forms/*/}
             <div className="col-md-12 col-sm-8 mb-2">
                 <select className="custom-dropdown w-full" placeholder="Select an option" onChange={(e) => handleFilter("make", e.target.value)}>
                     <option value="" default>Make</option>
@@ -59,6 +74,7 @@ function SideNav({catalog, handleFilter}) {
                 </select>
             </div>
 
+            {/*https://getbootstrap.com/docs/4.0/components/forms/*/}
             <div className="col-md-12 col-sm-8 mb-2">
                 <select className="custom-dropdown w-full" placeholder="Select an option" onChange={(e) => handleFilter("model", e.target.value)}>
                     <option value="" default>Model</option>
@@ -68,6 +84,7 @@ function SideNav({catalog, handleFilter}) {
                 </select>
             </div>
 
+            {/*https://getbootstrap.com/docs/4.0/components/forms/*/}
             <div className="col-md-12 col-sm-8 mb-2">
                 <select className="custom-dropdown w-full" placeholder="Select an option" onChange={(e) => handleFilter("type", e.target.value)}>
                     <option value="" default>Vehicle Type</option>
@@ -77,6 +94,7 @@ function SideNav({catalog, handleFilter}) {
                 </select>
             </div>
 
+            {/*https://getbootstrap.com/docs/4.0/components/forms/*/}
             <div className="col-md-12 col-sm-8 mb-2">
                 <select className="custom-dropdown w-full" placeholder="Select an option" onChange={(e) => handleFilter("color", e.target.value)}>
                     <option value="" default>Color</option>
@@ -84,6 +102,18 @@ function SideNav({catalog, handleFilter}) {
                             <option key={index} value={color}>{color}</option>
                         ))}
                 </select>
+            </div>
+            
+            {/*https://getbootstrap.com/docs/4.0/components/buttons/*/}
+            <div className="col-md-12 col-sm-8 mb-2">
+                <button className="btn btn-secondary w-full w-100" onClick={(e) => {
+                    e.preventDefault();
+                    handleFilter("reset", null);
+                    resetSelection();
+                }
+                }>
+                    Reset Filters
+                </button>
             </div>
         </nav>
     );
