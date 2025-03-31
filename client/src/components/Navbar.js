@@ -17,7 +17,7 @@ function Navbar() {
                         { loggedIn ? (
                             <>
                                 <a className="btn btn-outline-light me-2" href="/register">Register Account</a>
-                                <button className="btn btn-outline-light" onClick={() => {
+                                <button className="btn btn-outline-light me-2" onClick={() => {
                                     Logout();
                                     window.location.reload();
                                 }}>
@@ -25,8 +25,9 @@ function Navbar() {
                                 </button>
                             </>
                         ) : (
-                            <a className="btn btn-outline-light" href="/login">Login</a>
+                            <a className="btn btn-outline-light me-2" href="/login">Login</a>
                         )}
+                        <a className="btn btn-outline-light" download="user_doc.pdf" href="/user_doc.pdf">User Guide</a>
                     </li>
                 </ul>
             </div>
