@@ -10,7 +10,7 @@ client = TestClient(app)
 products = client.get("/products").json()
 users = client.get("/users").json()
 
-# sample test product
+# sample product
 sampleProduct = {
     "make": "test_make",
     "model": "test_model",
