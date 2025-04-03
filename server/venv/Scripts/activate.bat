@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\dillp\Projects\Winter2025\Analysis\updatedfractal\server\venv
+set VIRTUAL_ENV=C:\Users\dillp\projects\winter2025\analysis\fractal\server\venv
 
 if not defined PROMPT set PROMPT=$P$G
 
