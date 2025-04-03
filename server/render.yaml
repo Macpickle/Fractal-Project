@@ -1,7 +1,0 @@
-services:
-  - type: web
-    name: fractal
-    env: python
-    python_version: "3.12"  # or the required Python version
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "python main.py"
