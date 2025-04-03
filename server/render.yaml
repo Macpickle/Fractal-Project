@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: fractal
+    env: python
+    buildCommand: "bash install.sh"  # Run the script that installs dependencies
+    startCommand: "python main.py"
