@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const ROOT_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+const ROOT_URL = process.env.REACT_APP_API_URL
 
   
 // Axios request function, takes in an object with url, method, and data
