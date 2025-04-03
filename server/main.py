@@ -10,6 +10,7 @@ app = FastAPI()
 origins = [
     "http://localhost",
     "http://localhost:3000",
+    "https://fractal-91gqczumx-macpickles-projects.vercel.app",
 ]
 
 # allow app to recieve requests from the origins
