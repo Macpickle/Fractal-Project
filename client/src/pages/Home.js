@@ -7,6 +7,7 @@ import AxiosRequest from '../utils/Axios';
 import { useLocation } from 'react-router-dom';
 import SideNav from '../components/Sidenav';
 import Toast from '../components/Toast';
+import FilterHandler from '../components/FilterHandler';
 
 // main component for the home page
 // this is where the catalog of products are displayed
@@ -206,8 +207,8 @@ function Home() {
                 <li>Home</li>
             </Navbar>
 
-            <div className="container-fluid bg-light d-flex flex-row">
-                <SideNav catalog={catalog} handleFilter={handleFilter}/>
+            <div className="container-fluid bg-light d-flex flex-row w-100">
+                <SideNav filterComponent={<FilterHandler catalog={catalog} handleFilter={handleFilter} />} />
 
                 {/*https://getbootstrap.com/docs/5.0/layout/containers/*/}
                 <main className="container min-vh-100 p-0 m-0">
@@ -228,7 +229,7 @@ function Home() {
                                     onChange={(e) => handleSearch(e.target.value)}
                                 />
                             </div>
-                            <div className="col-md-2 col-sm-4 mb-2">
+                            <div className="col-md-2 col-sm-12 mb-2">
                                 {/*https://getbootstrap.com/docs/4.0/components/forms/*/}
                                 <select className="form-control" onChange={(e) => handleSort(e)}>
                                     <option value="" default>Sort   by...</option>
@@ -236,11 +237,10 @@ function Home() {
                                     <option value="price-high">Price: High to Low</option>
                                     <option value="time-low">Time: Newest</option>
                                     <option value="time-high">Time: Oldest</option>
-                
                                 </select>
                             </div>
 
-                            <div className="col-md-2 col-sm-4">
+                            <div className="col-md-2 col-sm-12">
                                 {localStorage.getItem("LoggedIn") &&
                                 <button className="btn btn-secondary w-100" onClick={() => setShowCreate(!showCreate)}>
                                     Create
@@ -251,7 +251,10 @@ function Home() {
                                     handleDisplay={() => setShowCreate(!showCreate)} 
                                     />
                                 }
-                                
+                            </div>
+
+                            <div className="display-block d-md-none col-sm-12 mb-2">
+                                <FilterHandler catalog={catalog} handleFilter={handleFilter} />
                             </div>
                         </div>
                     </div>
