@@ -11,6 +11,8 @@ origins = [
     "http://localhost",
     "http://localhost:3000",
     "https://fractal-91gqczumx-macpickles-projects.vercel.app",
+    "https://fractal-project.vercel.app",
+    "*"
 ]
 
 # allow app to recieve requests from the origins
@@ -24,3 +26,7 @@ app.add_middleware(
 
 app.include_router(userRouter)
 app.include_router(productRouter)
+
+@app.get("/")
+async def root():
+    return {"message": "Welcome to the Fractal API server!"}
