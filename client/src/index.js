@@ -6,10 +6,10 @@ import { Analytics } from "@vercel/analytics/react"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Analytics >
+
     <React.StrictMode>
+        <Analytics />
       <App />
     </React.StrictMode>
-  </Analytics>
 );
 
