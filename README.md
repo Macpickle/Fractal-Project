@@ -1,58 +1,49 @@
+# Fractal Catalogue System
+A simple, easy-to-use catalog management system for managing a list of items stored in a JSON database. It allows users to view, add, edit, remove, and search for items. The catalog also supports sorting by various attributes such as brand, price, and time added.
 
-# Catalog Management System
-
-CSCI 2040U - Software Design and Analysis
-
-A simple catalog management system that allows users to manage a list of items stored in a JSON database.
-
-**Completed Features (MVP)**
-- View Catalog: Display a list of catalog items from a JSON database.
-- Add Items: Users can add new items to the catalog.
-- Edit Items: Modify existing item details (e.g, brand, description, stock).
+# Features
+- View Catalog: Displays a list of items from the JSON database.
+- Add Items: Allows users to add new items to the catalog.
+- Edit Items: Modify existing item details (e.g., brand, description, stock).
 - Remove Items: Delete items from the catalog.
 - Save Updates: Changes persist in the JSON database.
+- Sort Catalog: Sort items by brand, price, or time added.
+- Search Functionality: Search items based on relevance.
 
-**In-progress Features**
-- Sort Catalog, Users can sort items by:
-    - Brand
-    - Price
-    - Time Added
+# Technologies Used
+[![Technologies](https://skillicons.dev/icons?i=react,js,bootstrap,html,css,python,fastapi)](https://skillicons.dev)
 
-- Search Functionality 
-    - Users can search for products by relevance.
-
-# How to run - BUILD
-These running instructions are specific to the build branch, for Windows systems to allow new developers to run our application. Please follow the steps to begin the application:
-
-### Clone the Repository
+# How to Run
+### 1. Start by cloning the repository to your local machine:
 ```
-git clone https://github.com/Macpickle/Fractal-Project.git <project name>
-cd <project name>
+git clone https://github.com/Macpickle/Fractal-Project.git <project-name>
+cd <project-name>
+npm install
 ```
 
-## Setup
-We are using React and Fast.api as our techstack, so please install and run the following commands on your machine to set up the server
-
-### Download dependencies for server
-Please install [Python](https://www.python.org/downloads/) & [Uvicorn](https://www.uvicorn.org/) to your local machine if it hasn't been installed already
+### 2. Set Up the Server (Backend)
+Make sure you have [Python](https://www.python.org/downloads/) and [Uvicorn](https://www.uvicorn.org/) installed on your machine.
+Navigate to the server directory and install the necessary dependencies:
 ```
 cd server
 ./run.bat
 ```
 
-### Download dependencies for client
-Please install [Node.JS](https://nodejs.org/en) to your local machine if it hasn't been installed already
+### 3. Set Up the Client (Frontend)
+Navigate to the client directory and install the necessary dependencies
 ```
 cd ../client
 ./run.bat
 ```
 
-## Running the application
-The application should be ready to load, please run and wait to start the application:
+### 4. Start the Application
+Once both the server and client are set up, you can start the application in the root of the directory:
 ```
 cd ..
 ./start.bat
 ```
 
+## Alternative Running
+To run on your local machine without needing to install all the dependencies, we created a executable to run on any `windows` machine. The link to this can be found [here](https://drive.google.com/file/d/1JbKIR2R9KPJMFcNO1Nf1kEV-g6R7Ce2M/view?usp=sharing). Simply download this, extract it, then run the main.exe executable. Then, access http://localhost:8000 in any browser.
 
-
+We also packaged it into a live website. You can access it [here](https://fractal-project.vercel.app/). Please note, this website may take a few minutes to startup, as the backend is a bit slow.
