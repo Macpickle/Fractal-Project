@@ -47,3 +47,5 @@ cd ..
 To run on your local machine without needing to install all the dependencies, we created a executable to run on any `windows` machine. The link to this can be found [here](https://drive.google.com/file/d/1JbKIR2R9KPJMFcNO1Nf1kEV-g6R7Ce2M/view?usp=sharing). Simply download this, extract it, then run the main.exe executable. Then, access http://localhost:8000 in any browser.
 
 We also packaged it into a live website. You can access it [here](https://fractal-project.vercel.app/). Please note, this website may take a few minutes to startup, as the backend is a bit slow.
+
+A demo video was created to show all the functionallity if you wish to not downlaod anything, the link can be found [here](https://drive.google.com/file/d/1cfn6dSI-4A9kzxVDyLtxmcx_TGLzoLly/view?usp=drive_link).
